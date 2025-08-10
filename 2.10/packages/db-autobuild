@@ -2447,12 +2447,10 @@ echo "At BUILDPERL"
 	env > ydfs.env
        pwd | grep ardour &&  LC_CONFIGURE_OPTS=" --with-backends=jack,alsa,dummy,pulseaudio \
                         --libjack=weak \
-                        --nls \
                         --optimize \
                         --cxx11 \
                         --freedesktop \
                         --ptformat \
-                        --lxvst \
                         --no-phone-home"
 
         pwd | grep ardour-tracker &&  LC_CONFIGURE_OPTS=" --with-backends=jack,alsa,dummy,pulseaudio \
@@ -2483,11 +2481,11 @@ echo "At BUILDPERL"
           # xdg integration
           install -vDm 644 "build/gtk2_${pkgname}/${pkgname}.xml" \
               -t "${pkgdir}/share/mime/packages/" || exit 1
-          install -vDm 644 "build/gtk2_${pkgname}/${pkgname}7.desktop" \
+          install -vDm 644 "build/gtk2_${pkgname}/${pkgname}8.desktop" \
                "${pkgdir}/share/applications/${pkgname}.desktop" || exit 1
           for size in 16 22 32 48 256 512; do
             install -vDm 644 "gtk2_${pkgname}/resources/Ardour-icon_${size}px.png" \
-            "${pkgdir}/share/icons/hicolor/${size}x${size}/apps/${pkgname}7.png" || exit 1
+            "${pkgdir}/share/icons/hicolor/${size}x${size}/apps/${pkgname}8.png" || exit 1
           done
           touch buildok-$ARCH
     	  ydfs-install-package
