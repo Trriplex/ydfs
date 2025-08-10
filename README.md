@@ -1,29 +1,39 @@
-# About Ydfs
+# About musicOS
 
-(Your Distro From Scratch) is a tool to build your own linux distribution 
+The ulitmate LiveUSB any musician should have to play music, even if no network is available !
 
-To build 32 bits ISO, you must switch to 2.10-32bits branch :
+> Get the code 
 
-* git checkout 2.10-32bits
+```
+git clone git@github.com:linuxconsole-org/ydfs.git musicOS
+cd musicOS
+```
 
-# Full Build (32 & 64 bits)
+> Switch to 2.10-musicOS 
 
-* cd 2.10
-* docker-compose up -d
+```
+git branch -v -a
+git switch 2.10-musicOS
+cd 2.10
+```
 
-# Fast Build (32 & 64 bits)
+# Docker Fast Build
 
-* cd 2.10
-* BUILDYDFS="fast" docker-compose up -d
+> Prepare local folders
+```
+install -d $HOME/musicOS/x86_64
+install -d $HOME/musicOS/iso
+install -d $HOME/musicOS/ydfs
+install -d $HOME/musicOS/mate
+install -d $HOME/musicOS/musicOS
+chmod 777 $HOME/musicOS/x86_64
+chmod 777 $HOME/musicOS/iso
+chmod 777 $HOME/musicOS/ydfs
+chmod 777 $HOME/musicOS/mate
+chmod 777 $HOME/musicOS/musicOS
+```
 
-# Manual build
-
-* sudo apt-get install -y vim ack wget openjdk-21-jdk-headless libncurses5-dev  rustc python3-mako cargo gcc-multilib g++-multilib ant libssl-dev libwrap0 gsoap meson libghc-sandi-dev libghc-regex-tdfa-dev libghc-base-dev libghc-sha-dev libbabeltrace-ctf1 xz-utils libxml-parser-perl patch libunwind8 libclc-dev ftjam locales syslinux-utils ghc libghc-random-dev libghc-zlib-dev libghc-entropy-dev libghc-utf8-string-dev ghc libghc-vector-dev libghc-network-dev libghc-hslogger-dev makeself iasl doxygen p7zip-full xutils-dev xmlto libelf-dev imagemagick bam fontforge ruby libboost-all-dev libboost-dev nasm libatomic-ops-dev unzip bc lynx cmake xfonts-utils xsltproc zlib1g-dev gperf bzr unicode-data gettext docbook-xsl make mtd-utils pciutils texinfo bzip2 subversion git gawk bison flex automake autoconf libtool-bin libtool cvs lzma g++ genisoimage libmpfr-dev locales apt-utils llvm-13 vim cpio curl rdfind rsync kmod cupinfo xorriso
-
-* cd 2.10
-
-# For fast option
-
-* export BUILDYDFS=fast
-* make iso
-
+> Build iso
+```
+docker-compose run musicOS-2024-fast bash -c 'cd /2.10; unset BUILDYDFS; make iso'
+```
