@@ -12,6 +12,7 @@ services:
             - ${PWD}:/2.10
         environment:
             BUILDYDFS: "fast"
+            HOMEBUILD: "$HOME/musicOS"
             SLEEPTIME: 1
         security_opt:
             - seccomp:unconfined

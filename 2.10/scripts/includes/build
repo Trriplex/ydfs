@@ -21,7 +21,12 @@ build_ydfs_package()
   else
   PKGNAME=`basename $PWD`
   echo -n "Building $PKGNAME in progress, "     
-  echo "LOG: $PWD/ydfs-log ... "
+  if [ "$HOMEBUILD" != "" ]
+  then
+    echo "LOG (outside docker): $HOMEBUILD$PWD/ydfs-log ... " | sed  "s@$HOME@@"
+  else
+    echo "LOG: $PWD/ydfs-log ... "
+  fi
 #  echo "Err : $PWD/ydfs-error "
   TIME=`date "+%H:%M"`
   TIME2=`date "+%d/%m/%Y" `
