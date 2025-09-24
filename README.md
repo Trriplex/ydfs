@@ -13,7 +13,7 @@ cd musicOS
 
 ```
 git branch -v -a
-git checkout 2.10-musicOS
+git checkout origin/2.10-Music
 cd 2.10
 ```
 
