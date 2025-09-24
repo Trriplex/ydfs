@@ -35,5 +35,5 @@ chmod 777 $HOME/musicOS/musicOS
 
 > Build iso
 ```
-docker-compose run musicOS-2024-fast bash -c 'cp -a /2.10/ $HOME;cd $HOME/2.10; make iso'
+docker compose run musicOS-2024-fast bash -c 'cp -a /2.10/ $HOME;cd $HOME/2.10; make iso'
 ```
