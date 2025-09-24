@@ -5,7 +5,7 @@ The ulitmate LiveUSB any musician should have to play music, even if no network 
 > Get the code 
 
 ```
-git clone git@github.com:linuxconsole-org/ydfs.git musicOS
+git clone https://github.com/linuxconsole-org/ydfs.git musicOS
 cd musicOS
 ```
 
