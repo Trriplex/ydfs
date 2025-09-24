@@ -22,12 +22,12 @@ cd 2.10
 > Prepare local folders
 ```
 install -d $HOME/musicOS/x86_64
-install -d $HOME/musicOS/iso
+install -d $HOME/iso
 install -d $HOME/musicOS/ydfs
 install -d $HOME/musicOS/mate
 install -d $HOME/musicOS/musicOS
 chmod 777 $HOME/musicOS/x86_64
-chmod 777 $HOME/musicOS/iso
+chmod 777 $HOME/iso
 chmod 777 $HOME/musicOS/ydfs
 chmod 777 $HOME/musicOS/mate
 chmod 777 $HOME/musicOS/musicOS
@@ -35,5 +35,5 @@ chmod 777 $HOME/musicOS/musicOS
 
 > Build iso
 ```
-docker-compose run musicOS-2024-fast bash -c 'cd /2.10; rm config.ini; make iso'
+docker-compose run musicOS-2024-fast bash -c 'cd /2.10; unset BUILDYDFS; make iso'
 ```
