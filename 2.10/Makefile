@@ -128,7 +128,7 @@ all:
 	@echo "make modules "
 	@echo "make opkg "
 	tail -f /dev/null
-isodep: config.ini toolchain ${HOME}/${ARCH}/buildenv busybox initramfs linux core music mate lxde xfce firmware drivers $(DISTRONAME)
+isodep: config.ini toolchain ${HOME}/${ARCH}/buildenv busybox initramfs linux core music mate firmware drivers $(DISTRONAME)
 sleep:
 	@echo "Sleeping $SLEEPTIME seconds .. "
 	sleep ${SLEEPTIME}

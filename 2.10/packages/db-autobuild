@@ -130,6 +130,10 @@ else
 
   [ -e src/libwebp.pc.in ] && rm CMakeLists.txt
 
+  # geonkick
+  [ -e src/redkite/tools ] && ln -s $HOME/$ARCH/include/cairo src/redkite/tools/
+  [ -e src/redkite/tools ] && ln -s $HOME/$ARCH/include/jack src/redkite/include/
+
   if [ -e src/unetbootin/build-nostatic ]
   then
     cd src/unetbootin/
