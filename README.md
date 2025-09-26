@@ -1,46 +1,50 @@
-# About musicOS
+# About 2.10-modules
 
-The ulitmate LiveUSB any musician should have to play music, even if no network is available !
+This branch is designed to build modules and packages for the 2.10 branch and LinuxConsole 2024
 
 > Get the code 
 
 ```
-git clone https://github.com/linuxconsole-org/ydfs.git musicOS
-cd musicOS
+git clone https://github.com/linuxconsole-org/ydfs.git 2.10-modules
+cd 2.10-modules
 ```
 
-> Switch to 2.10-musicOS 
+> Switch to 2.10-modules
 
 ```
-git branch -v -a
-git checkout origin/2.10-Music
+git fetch -a
+git checkout 2.10-modules
 cd 2.10
 ```
 
 # Docker Fast Build
 
-> Prepare local folders
+> Prepare local folders, replace kde with your module name
 ```
-install -d $HOME/musicOS/x86_64
+install -d $HOME/2.10-modules/x86_64
 install -d $HOME/iso
-install -d $HOME/musicOS/ydfs
-install -d $HOME/musicOS/mate
-install -d $HOME/musicOS/kde
-install -d $HOME/musicOS/musicOS
-chmod 777 $HOME/musicOS/x86_64
+install -d $HOME/2.10-modules/ydfs
+install -d $HOME/2.10-modules/kde
+
+chmod 777 $HOME/2.10-modules/x86_64
 chmod 777 $HOME/iso
-chmod 777 $HOME/musicOS/ydfs
-chmod 777 $HOME/musicOS/mate
-chmod 777 $HOME/musicOS/kde
-chmod 777 $HOME/musicOS/musicOS
+chmod 777 $HOME/2.10-modules/ydfs
+chmod 777 $HOME/2.10-modules/kde
 ```
 
-> Build iso
+> In 2.10/docker-compose.yml, change kde with you module name
+
+> Build packages
 ```
-docker compose run musicOS-2024-fast bash -c 'cp -a /2.10/ $HOME;cd $HOME/2.10; DISTRONAME="music" make iso'
+docker-compose run -t -i ydfs2.10-modules-fast bash -c 'cp -a /2.10/ $HOME;cd $HOME/2.10; BUILDOPKG=YES YDFS_ARCH=x86_64 make opkg'
+```
+
+> Build a module
+```
+docker compose run ydfs2.10-modules-fast bash -c 'cp -a /2.10/ $HOME;cd $HOME/2.10; make kde'
 ```
 
 > Verbose build iso
 ```
-docker compose run musicOS-2024-fast bash -c 'cp -a /2.10/ $HOME;cd $HOME/2.10;DIBAB_VERBOSE_BUILD="YES" DISTRONAME="music" make iso'
+docker compose run ydfs2.10-modules-fast bash -c 'cp -a /2.10/ $HOME;cd $HOME/2.10;DIBAB_VERBOSE_BUILD="YES"  make kde'
 ```
