@@ -7,6 +7,7 @@ services:
             - $HOME/musicOS/ydfs:/home/linuxconsole2024/ydfs
             - $HOME/iso:/home/linuxconsole2024/iso
             - $HOME/musicOS/mate:/home/linuxconsole2024/mate
+            - $HOME/musicOS/kde:/home/linuxconsole2024/kde
             - $HOME/musicOS/musicOS:/home/linuxconsole2024/musicOS
             - $HOME/musicOS/x86_64:/home/linuxconsole2024/x86_64
             - ${PWD}:/2.10

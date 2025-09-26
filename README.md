@@ -25,11 +25,13 @@ install -d $HOME/musicOS/x86_64
 install -d $HOME/iso
 install -d $HOME/musicOS/ydfs
 install -d $HOME/musicOS/mate
+install -d $HOME/musicOS/kde
 install -d $HOME/musicOS/musicOS
 chmod 777 $HOME/musicOS/x86_64
 chmod 777 $HOME/iso
 chmod 777 $HOME/musicOS/ydfs
 chmod 777 $HOME/musicOS/mate
+chmod 777 $HOME/musicOS/kde
 chmod 777 $HOME/musicOS/musicOS
 ```
 
