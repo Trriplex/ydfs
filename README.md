@@ -36,7 +36,7 @@ chmod 777 $HOME/2.10-modules/kde
 
 > Build packages
 ```
-docker-compose run -t -i ydfs2.10-modules-fast bash -c 'cp -a /2.10/ $HOME;cd $HOME/2.10; BUILDOPKG=YES YDFS_ARCH=x86_64 make opkg'
+docker-compose run -t -i ydfs2.10-modules-fast bash -c 'cp -a /2.10/ $HOME;cd $HOME/2.10; DISTRONAME=all BUILDOPKG=YES YDFS_ARCH=x86_64 make opkg'
 ```
 
 > Build a module
