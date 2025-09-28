@@ -169,7 +169,8 @@ install -d $LCMBUILD
 # rm $LCMBUILD/devtools-$ARCH.squashfs
 MKSQUASHFS="$HOME/$ARCH/bin/mksquashfs "
 [ "$ARCH" = "arm" ] && MKSQUASHFS=mksquashfs
-rm $LCMBUILD/$ARCH.squashfs
+install -d $LCMBUILD
+[ -e $LCMBUILD/$ARCH.squashfs ] && rm $LCMBUILD/$ARCH.squashfs
 if [ "$ARCH" = "x86_64" ]
 then
 	$MKSQUASHFS $HOME/ydfs/modules/$ARCH $LCMBUILD/$ARCH.squashfs -all-root $MKSQUASHFS_OPT $MKSQUASHFS_EXCLUDE

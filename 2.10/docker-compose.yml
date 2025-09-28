@@ -1,5 +1,5 @@
 services:
-    ydfs2.10-modules-fast:
+    ydfs2.10-modules-fast64:
         image: yledoare/ydfs-2.10
         volumes:
             - $HOME/2.10-modules/ydfs:/home/linuxconsole2024/ydfs
@@ -11,6 +11,7 @@ services:
             - ${PWD}:/2.10
         environment:
             BUILDYDFS: "fast"
+            YDFS_ARCH: "x86_64"
             HOMEBUILD: "$HOME/2.10-modules"
             SLEEPTIME: 1
         security_opt:

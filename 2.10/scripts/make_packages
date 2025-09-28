@@ -1,4 +1,3 @@
-echo DEBUG $BUILDYDFS && sleep 1O
 if [ "$BUILDYDFS" = "fast" ] && [ "$1" = "$ARCH" ]
 then
   echo "Building fast $1"
