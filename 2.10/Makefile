@@ -209,6 +209,7 @@ ifeq ($(ARCH),arm)
 endif
 	
 ${HOME}/${ARCH}/buildenv: packages/list-${LIST}
+	echo "Build packages/list-${LIST}"
 	./scripts/make_packages ${LIST}
 core: ${LCMBUILD}/${ARCH}.squashfs 
 drivers: ${HOME}/ydfs/build/linux-${ARCH}-${KERNEL3}/.config ${LCMBUILD}/drivers-${ARCH}.squashfs
@@ -444,8 +445,6 @@ antivirus: ${LCMBUILD}antivirus-${ARCH}.squashfs
 ${LCMBUILD}antivirus-${ARCH}.squashfs : packages/list-antivirus
 	./scripts/make_packages antivirus
 	./scripts/make_module antivirus
-
-
 
 archive:
 	cd ..

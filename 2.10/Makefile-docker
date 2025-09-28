@@ -1,0 +1,15 @@
+
+bash-docker:
+	docker compose run -t -i ydfs2.10-modules-fast bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; bash'
+
+opkg-docker:
+	docker compose run -t -i ydfs2.10-modules-fast bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; DISTRONAME=all BUILDOPKG=YES YDFS_ARCH=x86_64 make opkg'
+
+kde-docker:
+	docker compose run ydfs2.10-modules-fast bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make kde'
+
+iso-docker:
+	docker compose run ydfs2.10-modules-fast bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make iso'
+
+iso-verbose-docker:
+	docker compose run ydfs2.10-modules-fast bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; DIBAB_VERBOSE_BUILD="YES"  make iso'
