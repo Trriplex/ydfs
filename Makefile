@@ -1,4 +1,4 @@
-all: prepare kde mate
+all: prepare packages kde mate
 
 prepare:
 	install -d ${HOME}/2.10-modules/x86_64
@@ -14,6 +14,7 @@ prepare:
 	chmod 777 ${HOME}/2.10-modules/kde
 	chmod 777 ${HOME}/2.10-modules/mate
 	chmod 777 ${HOME}/2.10-modules/virtualbox
+  cd 2.10 && make -f Makefile-docker buildenv-docker
 
 bash:
 	cd 2.10 && make -f Makefile-docker bash-docker

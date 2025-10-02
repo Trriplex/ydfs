@@ -6,12 +6,16 @@ COMPOSE=docker-compose
 endif
 
 DOCKER_OPTIONS=run --rm --remove-orphans ydfs2.10-modules-fast64 bash
+DOCKER_OPTIONS=run ydfs2.10-modules-fast64 bash
 
 bash-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; bash'
 
 opkg-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; DISTRONAME=all BUILDOPKG=YES make opkg'
+
+buildenv-docker:
+       ${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make buildenv'
 
 mate-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make mate'
