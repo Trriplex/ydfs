@@ -6,10 +6,10 @@ opkg-docker:
 	docker compose run -t -i ydfs2.10-modules-fast64 bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; DISTRONAME=all BUILDOPKG=YES make opkg'
 
 mate-docker:
-	docker compose run ydfs2.10-modules-fast64 bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make mate'
+	docker compose run --rm --remove-orphans ydfs2.10-modules-fast64 bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make mate'
 
 kde-docker:
-	docker compose run ydfs2.10-modules-fast64 bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make kde'
+	docker compose run --rm --remove-orphans ydfs2.10-modules-fast64 bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make kde'
 
 iso-docker:
 	docker compose run ydfs2.10-modules-fast64 bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make iso'
@@ -18,4 +18,5 @@ iso-verbose-docker:
 	docker compose run ydfs2.10-modules-fast64 bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; DIBAB_VERBOSE_BUILD="YES"  make iso'
 
 virtualbox-docker:
-	docker compose run -t -i ydfs2.10-modules-fast64 bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10;BUILDME=OK make virtualbox'
+	#docker compose run -t -i ydfs2.10-modules-fast64 bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10;BUILDME=OK make virtualbox'
+	docker compose run --rm --remove-orphans ydfs2.10-modules-fast64 bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10;make virtualbox'

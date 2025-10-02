@@ -1,8 +1,8 @@
 diff --git a/Config.kmk b/Config.kmk
-index 3df1974..6182cbd 100644
+index 86578c6..fbd8de3 100644
 --- a/Config.kmk
 +++ b/Config.kmk
-@@ -1655,7 +1655,7 @@ ASTOOL = $(VBOX_ASTOOL)
+@@ -1664,7 +1664,7 @@ ASTOOL = $(VBOX_ASTOOL)
  #
  # Note! The __SOMETHING__ #defines are deprecated as they violate the C/C++ specs.
  #
@@ -11,7 +11,7 @@ index 3df1974..6182cbd 100644
  DEFS += VBOX
  DEFS.debug      := DEBUG DEBUG_$(subst $(subst _, ,_),_,$(USERNAME)) DEBUG_USERNAME=$(subst $(subst _, ,_),_,$(USERNAME))
  DEFS.dbgopt      = $(DEFS.debug)
-@@ -2205,9 +2205,9 @@ endif
+@@ -2214,9 +2214,9 @@ endif
  
  # The X11 LIBPATH. (The amd64 hack is for RHEL4.)
  ifeq ($(KBUILD_TARGET_ARCH),amd64)
@@ -23,7 +23,7 @@ index 3df1974..6182cbd 100644
  endif
  
  # 32bit X11 LIBPATH for building 32bit guest additions
-@@ -2698,6 +2698,7 @@ else # !darwin
+@@ -2707,6 +2707,7 @@ else # !darwin
     VBOX_JAVA_HOME := $(firstword $(wildcard \
  	$(KBUILD_DEVTOOLS)/linux.x86/jdk1.6.0_27 \
  	/usr/lib/jvm/java-6-sun  \
@@ -31,7 +31,7 @@ index 3df1974..6182cbd 100644
  	/usr/lib/jvm/java-6-openjdk \
  	/usr/lib/jvm/java-6-openjdk-i386 \
  	/usr/lib/jvm/java-6-openjdk-amd64 \
-@@ -5233,7 +5234,7 @@ TEMPLATE_VBOXR3EXE_LDFLAGS.x86         = -m32
+@@ -5353,7 +5354,7 @@ TEMPLATE_VBOXR3EXE_LDFLAGS.x86         = -m32
  TEMPLATE_VBOXR3EXE_LDFLAGS.amd64       = -m64
  TEMPLATE_VBOXR3EXE_LDFLAGS.sparc32     = -m32
  TEMPLATE_VBOXR3EXE_LDFLAGS.sparc64     = -m64
@@ -40,7 +40,7 @@ index 3df1974..6182cbd 100644
  TEMPLATE_VBOXR3EXE_LDFLAGS.solaris     = -Wl,-z,ignore # same as VBOX_LD_as_needed
  TEMPLATE_VBOXR3EXE_LDFLAGS.debug       = $(VBOX_GCC_SANITIZER_FLAGS) $(VBOX_GCC_SANITIZER_LDFLAGS)
  
-@@ -6143,7 +6144,7 @@ TEMPLATE_VBOXMAINEXE_LDFLAGS.amd64       = -m64
+@@ -6264,7 +6265,7 @@ TEMPLATE_VBOXMAINEXE_LDFLAGS.amd64       = -m64
  TEMPLATE_VBOXMAINEXE_LDFLAGS.debug       = $(VBOX_GCC_SANITIZER_FLAGS) $(VBOX_GCC_SANITIZER_LDFLAGS)
   ifeq ($(KBUILD_TARGET),linux)
  TEMPLATE_VBOXMAINEXE_LIBS                = pthread m rt $(LIB_RUNTIME) dl
@@ -50,7 +50,7 @@ index 3df1974..6182cbd 100644
  TEMPLATE_VBOXMAINEXE_TOOL                = GXX3OMF
  TEMPLATE_VBOXMAINEXE_LIBS                = $(LIB_RUNTIME)
 diff --git a/configure b/configure
-index 8b8830f..14f7124 100755
+index 5f0a952..aec59d0 100755
 --- a/configure
 +++ b/configure
 @@ -20,7 +20,7 @@ export LC_ALL
@@ -123,15 +123,6 @@ index 8b8830f..14f7124 100755
  extern "C" int main(void)
  {
    OpusEncoder *test;
-@@ -2027,7 +2029,7 @@ extern "C" int main(void)
- }
- EOF
-   found=
--  SUPPYTHONLIBS="python2.7 python2.6 python3.1 python3.2 python3.3 python3.4 python3.4m python3.5 python3.5m python3.6 python3.6m python3.7 python3.7m python3.8 python3.8m python3.9 python3.9m"
-+  SUPPYTHONLIBS="python2.7 python2.6 python3.1 python3.2 python3.3 python3.4 python3.4m python3.5 python3.5m python3.6 python3.6m python3.7 python3.7m python3.8 python3.8m python3.9 python3.9m python3.10"
-   for p in $PYTHONDIR; do
-     for d in $SUPPYTHONLIBS; do
-       for b in lib/x86_64-linux-gnu lib/i386-linux-gnu lib64 lib/64 lib; do
 diff --git a/kBuild/sdks/LIBSDL.kmk b/kBuild/sdks/LIBSDL.kmk
 index 3e73cb3..9992a65 100644
 --- a/kBuild/sdks/LIBSDL.kmk
@@ -146,10 +137,10 @@ index 3e73cb3..9992a65 100644
     PATH_SDK_LIBSDL := $(firstword $(foreach root,$(KBUILD_LIB_SEARCH_ROOTS) \
     	,$(if $(wildcard $(addsuffix libSDL.*,$(addprefix $(root),$(KBUILD_LIB_SEARCH_SUBS)))),$(root),) ))
 diff --git a/src/VBox/Installer/linux/Makefile-header.gmk b/src/VBox/Installer/linux/Makefile-header.gmk
-index 19116a8..76eee30 100644
+index 9a0834e..503d535 100644
 --- a/src/VBox/Installer/linux/Makefile-header.gmk
 +++ b/src/VBox/Installer/linux/Makefile-header.gmk
-@@ -113,7 +113,8 @@ ifeq ($(KERNELRELEASE),)
+@@ -160,7 +160,8 @@ ifeq ($(KERNELRELEASE),)
   endif
  
   ifeq ($(KERN_DIR),)
