@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-2.0-or-later
 #   Copyright (C) 2001 Alexander S. Guy <a7r@andern.org>
 #                      Andern Research Labs
 #
@@ -31,6 +32,8 @@
 #        people to say "./control.tar.gz" or "./control" when they package files.
 #        It would be much better to require ./control or disallow ./control (either)
 #        rather than letting people pick.  Some freedoms aren't worth their cost.
+from __future__ import absolute_import
+from __future__ import print_function
 
 import tempfile
 import os
@@ -43,47 +46,76 @@ from stat import ST_SIZE
 import arfile
 import tarfile
 import textwrap
+import collections
 
-class Version:
+
+def order(x):
+    if not x:
+        return 0
+    if x == "~":
+        return -1
+    if str.isdigit(x):
+        return 0
+    if str.isalpha(x):
+        return ord(x)
+
+    return 256 + ord(x)
+
+
+class Version(object):
     """A class for holding parsed package version information."""
     def __init__(self, epoch, version):
         self.epoch = epoch
         self.version = version
 
     def _versioncompare(self, selfversion, refversion):
+        """
+                Implementation below is a copy of the opkg version comparison algorithm
+                http://git.yoctoproject.org/cgit/cgit.cgi/opkg/tree/libopkg/pkg.c*n933
+                it alternates between number and non number comparisons until a difference is found
+                digits are compared by value. other characters are sorted lexically using the above method orderOfChar
+
+                One slight modification, the original version can return any value, whereas this one is limited to -1, 0, +1
+                """
         if not selfversion: selfversion = ""
         if not refversion: refversion = ""
-        while 1:
-            ## first look for non-numeric version component
-            selfm = re.match('([^0-9]*)(.*)', selfversion)
-            #print(('selfm', selfm.groups()))
-            (selfalpha, selfversion) = selfm.groups()
-            refm = re.match('([^0-9]*)(.*)', refversion)
-            #print(('refm', refm.groups())
-            (refalpha, refversion) = refm.groups()
-            if (selfalpha > refalpha):
+
+        value = list(selfversion)
+        ref = list(refversion)
+
+        while value or ref:
+            first_diff = 0
+            # alphanumeric comparison
+            while (value and not str.isdigit(value[0])) or (ref and not str.isdigit(ref[0])):
+                vc = order(value.pop(0) if value else None)
+                rc = order(ref.pop(0) if ref else None)
+                if vc != rc:
+                    return -1 if vc < rc else 1
+
+            # comparing numbers
+            # start by skipping 0
+            while value and value[0] == "0":
+                value.pop(0)
+            while ref and ref[0] == "0":
+                ref.pop(0)
+
+            # actual number comparison
+            while value and str.isdigit(value[0]) and ref and str.isdigit(ref[0]):
+                if not first_diff:
+                    first_diff = int(value.pop(0)) - int(ref.pop(0))
+                else:
+                    value.pop(0)
+                    ref.pop(0)
+
+            # the one that has a value remaining was the highest number
+            if value and str.isdigit(value[0]):
                 return 1
-            elif (selfalpha < refalpha):
+            if ref and str.isdigit(ref[0]):
                 return -1
-            ## now look for numeric version component
-            (selfnum, selfversion) = re.match('([0-9]*)(.*)', selfversion).groups()
-            (refnum, refversion) = re.match('([0-9]*)(.*)', refversion).groups()
-            #print(('selfnum', selfnum, selfversion)
-            #print(('refnum', refnum, refversion)
-            if (selfnum != ''):
-                selfnum = int(selfnum)
-            else:
-                selfnum = -1
-            if (refnum != ''):
-                refnum = int(refnum)
-            else:
-                refnum = -1
-            if (selfnum > refnum):
-                return 1
-            elif (selfnum < refnum):
-                return -1
-            if selfversion == '' and refversion == '':
-                return 0
+            # in case of equal length numbers look at the first diff
+            if first_diff:
+                return 1 if first_diff > 0 else -1
+        return 0
 
     def compare(self, ref):
         if (self.epoch > ref.epoch):
@@ -113,10 +145,15 @@ def parse_version(versionstr):
         epoch = int(epochstr)
     return Version(epoch, versionstr)
 
-class Package:
+class Package(object):
     """A class for creating objects to manipulate (e.g. create) opkg
        packages."""
-    def __init__(self, fn=None):
+
+    # fn: Package file path
+    # relpath: If this argument is set, the file path is given relative to this
+    #   path when a string representation of the Package object is created. If
+    #   this argument is not set, the basename of the file path is given.
+    def __init__(self, fn=None, relpath=None, all_fields=None):
         self.package = None
         self.version = 'none'
         self.parsed_version = None
@@ -146,28 +183,34 @@ class Package:
         self.fn = fn
         self.license = None
 
+        self.user_defined_fields = collections.OrderedDict()
         if fn:
             # see if it is deb format
             f = open(fn, "rb")
 
-            self.filename = os.path.basename(fn)
+            if relpath:
+                self.filename = os.path.relpath(fn, relpath)
+            else:
+                self.filename = os.path.basename(fn)
 
             ## sys.stderr.write("  extracting control.tar.gz from %s\n"% (fn,)) 
 
-            ar = arfile.ArFile(f, fn)
-            tarStream = ar.open("control.tar.gz")
+            if tarfile.is_tarfile(fn):
+                tar = tarfile.open(fn, "r", f)
+                tarStream = tar.extractfile("./control.tar.gz")
+            else:
+                ar = arfile.ArFile(f, fn)
+                tarStream = ar.open("control.tar.gz")
             tarf = tarfile.open("control.tar.gz", "r", tarStream)
-
             try:
                 control = tarf.extractfile("control")
             except KeyError:
                 control = tarf.extractfile("./control")
             try:
-                self.read_control(control)
+                self.read_control(control, all_fields)
             except TypeError as e:
                 sys.stderr.write("Cannot read control file '%s' - %s\n" % (fn, e))
             control.close()
-
         self.scratch_dir = None
         self.file_dir = None
         self.meta_dir = None
@@ -176,6 +219,9 @@ class Package:
         if name == "md5":
             self._computeFileMD5()
             return self.md5
+        elif name == "sha256":
+            self._computeFileSHA256()
+            return self.sha256
         elif name == 'size':
             return self._get_file_size()
         else:
@@ -195,6 +241,20 @@ class Package:
             f.close()
             self.md5 = sum.hexdigest()
 
+    def _computeFileSHA256(self):
+        # compute the SHA256.
+        if not self.fn:
+            self.sha256 = 'Unknown'
+        else:
+            f = open(self.fn, "rb")
+            sum = hashlib.sha256()
+            while True:
+               data = f.read(1024)
+               if not data: break
+               sum.update(data)
+            f.close()
+            self.sha256 = sum.hexdigest()
+
     def _get_file_size(self):
         if not self.fn:
             self.size = 0;
@@ -203,28 +263,36 @@ class Package:
             self.size = stat[ST_SIZE]
         return int(self.size)
 
-    def read_control(self, control):
+    def read_control(self, control, all_fields=None):
         import os
 
         line = control.readline()
         while 1:
             if not line: break
+            # Decode if stream has byte strings
+            if not isinstance(line, str):
+                line = line.decode()
             line = line.rstrip()
-            lineparts = re.match(r'([\w-]*?):\s*(.*)', str(line))
+            lineparts = re.match(r'([\w-]*?):\s*(.*)', line)
             if lineparts:
-                name = lineparts.group(1).lower()
+                name = lineparts.group(1)
+                name_lowercase = name.lower()
                 value = lineparts.group(2)
                 while 1:
-                    line = control.readline()
+                    line = control.readline().rstrip()
                     if not line: break
                     if line[0] != ' ': break
                     value = value + '\n' + line
-                if name == 'size':
+                if name_lowercase == 'size':
                     self.size = int(value)
-                elif name == 'md5sum':
+                elif name_lowercase == 'md5sum':
                     self.md5 = value
-                elif name in self.__dict__:
-                    self.__dict__[name] = value
+                elif name_lowercase == 'sha256sum':
+                    self.sha256 = value
+                elif name_lowercase in self.__dict__:
+                    self.__dict__[name_lowercase] = value
+                elif all_fields:
+                    self.user_defined_fields[name] = value
                 else:
                     print("Lost field %s, %s" % (name,value))
                     pass
@@ -344,6 +412,7 @@ class Package:
                 error = subprocess.CalledProcessError(retcode, cmd)
                 error.output = output
                 raise error
+            output = output.decode("utf-8")
             return output
 
         if not self.fn:
@@ -367,10 +436,14 @@ class Package:
             return []
         f = open(self.fn, "rb")
         ar = arfile.ArFile(f, self.fn)
-        tarStream = ar.open("data.tar.gz")
-        tarf = tarfile.open("data.tar.gz", "r", tarStream)
+        try:
+            tarStream = ar.open("data.tar.gz")
+            tarf = tarfile.open("data.tar.gz", "r", tarStream)
+        except IOError:
+            tarStream = ar.open("data.tar.xz")
+            tarf = tarfile.open("data.tar.xz", "r:xz", tarStream)
         self.file_list = tarf.getnames()
-        self.file_list = map(lambda a: ["./", ""][a.startswith("./")] + a, self.file_list)
+        self.file_list = [["./", ""][a.startswith("./")] + a for a in self.file_list]
 
         f.close()
         return self.file_list
@@ -443,7 +516,7 @@ class Package:
             ref.parsed_version = parse_version(ref.version)
         return self.parsed_version.compare(ref.parsed_version)
 
-    def __str__(self):
+    def print(self, checksum):
         out = ""
 
         # XXX - Some checks need to be made, and some exceptions
@@ -460,19 +533,23 @@ class Package:
         if self.section: out = out + "Section: %s\n" % (self.section)
         if self.architecture: out = out + "Architecture: %s\n" % (self.architecture)
         if self.maintainer: out = out + "Maintainer: %s\n" % (self.maintainer)
-        if self.md5: out = out + "MD5Sum: %s\n" % (self.md5)
+        if 'md5' in checksum:
+            if self.md5: out = out + "MD5Sum: %s\n" % (self.md5)
+        if 'sha256' in checksum:
+            if self.sha256: out = out + "SHA256sum: %s\n" % (self.sha256)
         if self.size: out = out + "Size: %d\n" % int(self.size)
         if self.installed_size: out = out + "InstalledSize: %d\n" % int(self.installed_size)
         if self.filename: out = out + "Filename: %s\n" % (self.filename)
         if self.source: out = out + "Source: %s\n" % (self.source)
-        if self.description:
-            printable_description = textwrap.dedent(self.description).strip()
-            out = out + "Description: %s\n" % textwrap.fill(printable_description, width=74, initial_indent=' ', subsequent_indent=' ')
+        if self.description: out = out + "Description: %s\n" % (self.description)
         if self.oe: out = out + "OE: %s\n" % (self.oe)
         if self.homepage: out = out + "HomePage: %s\n" % (self.homepage)
         if self.license: out = out + "License: %s\n" % (self.license)
         if self.priority: out = out + "Priority: %s\n" % (self.priority)
         if self.tags: out = out + "Tags: %s\n" % (self.tags)
+        if self.user_defined_fields:
+            for k, v in self.user_defined_fields.items():
+                out = out + "%s: %s\n" % (k, v)
         out = out + "\n"
 
         return out
@@ -482,16 +559,21 @@ class Package:
         #       are being destroyed?  -- a7r
         pass
 
-class Packages:
+class Packages(object):
     """A currently unimplemented wrapper around the opkg utility."""
     def __init__(self):
         self.packages = {}
         return
 
-    def add_package(self, pkg):
+    def add_package(self, pkg, opt_a=0):
         package = pkg.package
         arch = pkg.architecture
-        name = ("%s:%s" % (package, arch))
+        ver = pkg.version
+        if opt_a:
+            name = ("%s:%s:%s" % (package, arch, ver))
+        else:
+            name = ("%s:%s" % (package, arch))
+
         if (name not in self.packages):
             self.packages[name] = pkg
         
@@ -501,12 +583,12 @@ class Packages:
         else:
             return 1
 
-    def read_packages_file(self, fn):
+    def read_packages_file(self, fn, all_fields=None):
         f = open(fn, "r")
         while True:
             pkg = Package()
             try:
-                pkg.read_control(f)
+                pkg.read_control(f, all_fields)
             except TypeError as e:
                 sys.stderr.write("Cannot read control file '%s' - %s\n" % (fn, e))
                 continue
@@ -522,7 +604,7 @@ class Packages:
         names = list(self.packages.keys())
         names.sort()
         for name in names:
-            f.write(self.packages[name].__repr__())
+            f.write(self.packages[name].__str__())
         return    
 
     def keys(self):
@@ -538,6 +620,7 @@ if __name__ == "__main__":
     assert Version(0, "1.2.2+cvs20070308").compare(Version(0, "1.2.2-r0")) == 1
     assert Version(0, "1.2.2-r0").compare(Version(0, "1.2.2-r0")) == 0
     assert Version(0, "1.2.2-r5").compare(Version(0, "1.2.2-r0")) == 1
+    assert Version(0, "1.1.2~r1").compare(Version(0, "1.1.2")) == -1
 
     package = Package()
 

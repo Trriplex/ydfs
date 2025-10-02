@@ -33,5 +33,5 @@ https://archive.mesa3d.org/demos/8.5.0/mesa-demos-8.5.0.tar.bz2
 https://www.adebenham.com/files/mtp/mtpfs-1.1.tar.gz
 freerdp-2.7.0.tar.gz::https://github.com/freerdp/freerdp/archive/2.7.0.tar.gz
 #https://github.com/fusioninventory/fusioninventory-agent/releases/download/2.6/FusionInventory-Agent-2.6.tar.gz
-#For Opkg
-https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz
+#For Opkg - old not needed now
+#https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz
