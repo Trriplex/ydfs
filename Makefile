@@ -16,17 +16,17 @@ prepare:
 	chmod 777 ${HOME}/2.10-modules/virtualbox
 
 bash:
-	make -C 2.10 -f Makefile-docker bash-docker
+	cd 2.10 && make -f Makefile-docker bash-docker
 
 packages:
-	make -C 2.10 -f Makefile-docker opkg-docker
+	cd 2.10 && make -f Makefile-docker opkg-docker
 
 kde:
-	make -C 2.10 -f Makefile-docker kde-docker
+	cd 2.10 && make -f Makefile-docker kde-docker
 
 mate:
-	make -C 2.10 -f Makefile-docker mate-docker
+	cd 2.10 && make -f Makefile-docker mate-docker
 
 virtualbox:
-	make -C 2.10 -f Makefile-docker virtualbox-docker
+	cd 2.10 && make -f Makefile-docker virtualbox-docker
 
