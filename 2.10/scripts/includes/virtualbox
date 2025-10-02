@@ -14,7 +14,7 @@
     if [ ! -e env.sh ]
     then
 	echo "Build Virtualbox" && sleep 1
-	./configure --disable-java --disable-devmapper --with-linux=$HOME/ydfs/build/linux-x86_64-$KERNEL3 --disable-kmods --disable-hardening --disable-docs || exit $
+	./configure --disable-java --disable-devmapper --with-linux=$HOME/ydfs/build/linux-x86_64-$KERNEL3 --disable-kmods --disable-hardening --disable-docs || exit $?
     fi
     if [ ! -e out/linux.amd64/release/bin/VBoxSDL ]
     then
