@@ -15,7 +15,7 @@ opkg-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; DISTRONAME=all BUILDOPKG=YES make opkg'
 
 buildenv-docker:
-       ${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make buildenv'
+	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make buildenv'
 
 mate-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make mate'

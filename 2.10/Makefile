@@ -393,6 +393,7 @@ fixopkg:
 #	./scripts/make_custom_opkg arabic
 #	./scripts/make_custom_opkg spring
 	./scripts/make_opkg_filelist opkg
+buildenv: ${HOME}/${ARCH}/buildenv
 opkg: ${HOME}/${ARCH}/buildenv ${HOME}/ydfs/opkg/Packages
 ${HOME}/ydfs/opkg/Packages : packages/list-opkg-${DISTRONAME}
 ifeq ($(BUILDOPKG),YES)

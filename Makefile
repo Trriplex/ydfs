@@ -14,7 +14,7 @@ prepare:
 	chmod 777 ${HOME}/2.10-modules/kde
 	chmod 777 ${HOME}/2.10-modules/mate
 	chmod 777 ${HOME}/2.10-modules/virtualbox
-  cd 2.10 && make -f Makefile-docker buildenv-docker
+	cd 2.10 && make -f Makefile-docker buildenv-docker
 
 bash:
 	cd 2.10 && make -f Makefile-docker bash-docker
