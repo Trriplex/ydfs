@@ -230,9 +230,9 @@ ${HOME}/ydfs/archives/${ARCH}-${VENDOR}-linux-toolchain.tar.bz2:
 	./scripts/make_archives
 updates: packages/list-updates
 	./scripts/make_packages updates
-xbmc: packages/list-xbmc
-	./scripts/make_packages xbmc
-	./scripts/make_module xbmc
+kodi: packages/list-kodi
+	./scripts/make_packages kodi
+	./scripts/make_module kodi
 hackerOS: packages/list-hackerOS
 	./scripts/make_packages hackerOS
 	./scripts/make_module hackerOS
@@ -437,10 +437,10 @@ ${LCMBUILD}pantheon-${ARCH}.squashfs : packages/list-pantheon
 	./scripts/make_packages pantheon
 	./scripts/make_module pantheon
    
-xbmc: ${LCMBUILD}xbmc-${ARCH}.squashfs
-${LCMBUILD}xbmc-${ARCH}.squashfs : packages/list-xbmc
-	./scripts/make_packages xbmc
-	./scripts/make_module xbmc
+kodi: ${LCMBUILD}kodi-${ARCH}.squashfs
+${LCMBUILD}kodi-${ARCH}.squashfs : packages/list-kodi
+	./scripts/make_packages kodi
+	./scripts/make_module kodi
 
 antivirus: ${LCMBUILD}antivirus-${ARCH}.squashfs
 ${LCMBUILD}antivirus-${ARCH}.squashfs : packages/list-antivirus

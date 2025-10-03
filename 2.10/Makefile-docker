@@ -5,8 +5,12 @@ else
 COMPOSE=docker-compose
 endif
 
-DOCKER_OPTIONS=run --rm --remove-orphans ydfs2.10-modules-fast64 bash
-DOCKER_OPTIONS=run ydfs2.10-modules-fast64 bash
+DOCKER_OPTIONS=run --rm --remove-orphans ydfs2.10-modules-fast64 bash 
+DOCKER_OPTIONS=run --remove-orphans ydfs2.10-modules-fast64 bash
+BUILD_COMMAND=cp -a /2.10/ /tmp;cd /tmp/2.10;
+
+OPTION_BUILD=DIBAB_VERBOSE_BUILD="YES" BUILDME=OK
+OPTION_BUILD=DIBAB_VERBOSE_BUILD="YES"
 
 bash-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; bash'
@@ -19,6 +23,9 @@ buildenv-docker:
 
 mate-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make mate'
+
+kodi-docker:
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make kodi'
 
 kde-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make kde'

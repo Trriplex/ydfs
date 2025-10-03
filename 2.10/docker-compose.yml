@@ -6,6 +6,7 @@ services:
             - $HOME/iso:/home/linuxconsole2024/iso
             - $HOME/2.10-modules/kde:/home/linuxconsole2024/kde
             - $HOME/2.10-modules/mate:/home/linuxconsole2024/mate
+            - $HOME/2.10-modules/kodi:/home/linuxconsole2024/kodi
             - $HOME/2.10-modules/virtualbox:/home/linuxconsole2024/virtualbox
             - $HOME/2.10-modules/x86_64:/home/linuxconsole2024/x86_64
             - ${PWD}:/2.10
