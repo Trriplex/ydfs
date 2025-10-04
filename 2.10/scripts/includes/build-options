@@ -343,7 +343,6 @@ echo $ARCHIVE | grep virglrenderer && LC_CONFIGURE_OPTS="  -Dvenus-experimental=
 	echo $ARCHIVE | grep xwax && export LC_CONFIGURE_OPTS="--enable-alsa"
 	echo $ARCHIVE | grep ntp-4 && export LC_CONFIGURE_OPTS="-enable-linuxcaps --enable-ntp-signd"
 	echo $ARCHIVE | grep vegastrike && export LC_CONFIGURE_OPTS="--enable-permissive --disable-ffmpeg --with-openal-libs=$HOME/$ARCH"
-#	echo $ARCHIVE | grep xbmc && export LC_CONFIGURE_OPTS="--disable-debug"
 	echo $ARCHIVE | grep celestia && export LC_CONFIGURE_OPTS="-without-lua --with-gtk --disable-rpath "
 	echo $ARCHIVE | grep lxinput && export LC_CONFIGURE_OPTS="--enable-man"
 	echo $ARCHIVE | grep gnome-system-tools && export LC_CONFIGURE_OPTS="--disable-nautilus --disable-scrollkeeper --disable-static --disable-services " && export LIBS="-lm -lgthread-2.0"

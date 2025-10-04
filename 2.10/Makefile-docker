@@ -9,6 +9,7 @@ DOCKER_OPTIONS=run --rm --remove-orphans ydfs2.10-modules-fast64 bash
 DOCKER_OPTIONS=run --remove-orphans ydfs2.10-modules-fast64 bash
 BUILD_COMMAND=cp -a /2.10/ /tmp;cd /tmp/2.10;
 
+OPTION_BUILD=
 OPTION_BUILD=DIBAB_VERBOSE_BUILD="YES" BUILDME=OK
 OPTION_BUILD=DIBAB_VERBOSE_BUILD="YES"
 

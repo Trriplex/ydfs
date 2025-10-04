@@ -944,8 +944,8 @@ fi
   [ -e SDL_Pango.pc.in ] && [ -e configure ] && rm configure && echo " Forced remake configure " && sleep 5 && ACLOCAL_FLAGS="-I $HOME/$ARCH/share/aclocal " && ACLOCAL="aclocal $ACLOCAL_FLAGS "  && autoreconf --force --install
     
 . $(dirname $0)/../scripts/includes/login
-
-#. $(dirname $0)/../scripts/includes/xbmc
+ pwd | grep xbmc && mv $HOME/$ARCH/include/fmt  $HOME/$ARCH/include/fmt-disabled 
+. $(dirname $0)/../scripts/includes/xbmc
 
   if [ -e src/SFML ] && [ -e $PREFIX/include/SFML ]
   then

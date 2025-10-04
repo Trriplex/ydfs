@@ -1,22 +1,22 @@
 #!/bin/sh
 if [ -e xbmc-xrandr.c ]
 then
-	echo "Build Kodi" && sleep 5
 
-    mkdir kodi-build
-    cd kodi-build
-
+_fmt_version="6.1.2"
 _libdvdcss_version="1.4.3"
 _libdvdnav_version="6.0.0"
 _libdvdread_version="6.1.3"
 _ffmpeg_version="4.3-kodi-dav1d-1.0"
-_fmt_version="6.1.2"
 _spdlog_version="1.5.0"
 _crossguid_version="8f399e8bd4"
 _fstrcmp_version="0.7.D001"
 _flatbuffers_version="1.12.0"
 _libudfread_version="1.1.0"
 _codename=Matrix
+
+  echo "Build Kodi" && sleep 5
+  mkdir kodi-build
+  cd kodi-build
 
 for LIST in "flatbuffers-$_flatbuffers_version.tar.gz::http://mirrors.kodi.tv/build-deps/sources/flatbuffers-$_flatbuffers_version.tar.gz" \
   "fmt-$_fmt_version.tar.gz::http://mirrors.kodi.tv/build-deps/sources/fmt-$_fmt_version.tar.gz" \
@@ -47,7 +47,6 @@ done
     -DENABLE_BLURAY=ON
     -DENABLE_CEC=ON
     -DENABLE_DBUS=ON
-    -DENABLE_DVDCSS=ON
     -DENABLE_EGL=ON
     -DENABLE_EVENTCLIENTS=ON
     -DENABLE_MICROHTTPD=ON
@@ -56,6 +55,7 @@ done
     -DENABLE_OPTICAL=ON
     -DENABLE_PULSEAUDIO=ON
     -DENABLE_SMBCLIENT=ON
+    -DENABLE_DVDCSS=ON
     -DENABLE_UDEV=ON
     -DENABLE_UPNP=ON
     -DENABLE_VAAPI=ON
@@ -70,34 +70,38 @@ done
     -DENABLE_INTERNAL_CROSSGUID=ON
     -DENABLE_INTERNAL_FSTRCMP=ON
     -DENABLE_INTERNAL_UDFREAD=ON
+    -DFMT_URL="$PWD/fmt-$_fmt_version.tar.gz"
     -Dlibdvdcss_URL="$PWD/libdvdcss-1.4.3.tar.bz2"
-    -Dlibdvread_URL="$PWD/ydfs/tarballs/libdvdread-6.1.3.tar.bz2"
     -DCROSSGUID_URL="$PWD/crossguid-$_crossguid_version.tar.gz"
     -DFSTRCMP_URL="$PWD/fstrcmp-$_fstrcmp_version.tar.gz"
     -DUDFREAD_URL="$PWD/libudfread-$_libudfread_version.tar.gz"
-    -DFMT_URL="$PWD/fmt-$_fmt_version.tar.gz"
     -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib \
-    -DAPP_RENDER_SYSTEM=gl
+    -DAPP_RENDER_SYSTEM=gl \
     -DLIRC_DEVICE=/run/lirc/lircd"
-    OPTS=" -DCMAKE_INSTALL_PREFIX=$PREFIX "
+#    OPTS=" -DCMAKE_INSTALL_PREFIX=$PREFIX "
+    #-Dlibdvread_URL="$PWD/libdvdread-6.1.3.tar.bz2"
     # -DFFMPEG_URL="$PWD/ffmpeg-$_ffmpeg_version.tar.gz"
     echo " OPTS : $OPTS"
 
     if [ ! -e Makefile ]
     then
-      VERBOSE=1 CXX="g++ -I$PWD/build/include/" cmake $OPTS2 ../ || exit 1
+      VERBOSE=1 CXX="g++ -I$PWD/build/include/" cmake $OPTS ../ || exit 1
     fi
 
-    echo "BUILD .. "
-    VERBOSE=1 make  || exit $?
+    echo "BUILD 1 .. "
 
-#    echo "BUILD 2 .. "
-#    cd build/fstrcmp/src/fstrcmp
-#	ACLOCAL_FLAGS="-I $HOME/$ARCH/share/aclocal " && ACLOCAL="aclocal -I $HOME/opkg/share/aclocal $ACLOCAL_FLAGS " autoreconf -vif || exit 1
-#    cd ../../../
+    VERBOSE=1 make 
 
-#    echo "BUILD 5 .. "
-#    VERBOSE=1 make || exit $?
+    echo "Fix configure scripts .. "
+
+    cd build/libdvd/src/dvdnav
+	ACLOCAL_FLAGS="-I $HOME/$ARCH/share/aclocal " && ACLOCAL="aclocal -I $HOME/opkg/share/aclocal $ACLOCAL_FLAGS " autoreconf -vif || exit 1
+    cd ../libdvdread
+	ACLOCAL_FLAGS="-I $HOME/$ARCH/share/aclocal " && ACLOCAL="aclocal -I $HOME/opkg/share/aclocal $ACLOCAL_FLAGS " autoreconf -vif || exit 1
+    cd ../../../../
+
+    echo "BUILD 2 .. "
+    VERBOSE=1 make || exit $?
     make install || exit $?
     DESTDIR=$HOME/ydfs/packages-$ARCH/$MYDIR make install
   if [ "$MODULE" = "opkg" ]
@@ -107,4 +111,4 @@ done
   fi
      touch buildok-$ARCH
      exit 0 
-fi 
+fi
