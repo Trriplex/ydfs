@@ -230,7 +230,9 @@ ${HOME}/ydfs/archives/${ARCH}-${VENDOR}-linux-toolchain.tar.bz2:
 	./scripts/make_archives
 updates: packages/list-updates
 	./scripts/make_packages updates
-kodi: packages/list-kodi
+
+kodi: ${LCMBUILD}/kodi-${ARCH}.squashfs
+${LCMBUILD}/kodi-${ARCH}.squashfs : packages/list-kodi
 	./scripts/make_packages kodi
 	./scripts/make_module kodi
 hackerOS: packages/list-hackerOS

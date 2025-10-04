@@ -1,4 +1,4 @@
-all: prepare packages kde mate
+all: prepare packages kde mate kodi
 
 prepare:
 	install -d ${HOME}/2.10-modules/x86_64
