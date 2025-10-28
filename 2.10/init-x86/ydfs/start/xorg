@@ -3,6 +3,16 @@
 . /etc/profile
 install -d /etc/X11/xorg.conf.d/ 
 
+
+echo 'Section "InputClass"
+        Identifier "joystick catchall"
+        MatchIsJoystick "on"
+        MatchDevicePath "/dev/input/event*"
+        Driver "joystick"
+        Option "StartKeysEnabled" "False"
+#        Option "StartMouseEnabled" "False"
+EndSection ' > /etc/X11/xorg.conf.d/js.conf
+
 [ ! -e /etc/X11/xorg.conf.d/kb.conf ] && echo '
 Section "InputClass"
 	Identifier "Keyboard Layout"

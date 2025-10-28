@@ -37,3 +37,6 @@ mate:
 virtualbox:
 	cd 2.10 && make -f Makefile-docker virtualbox-docker
 
+iso:
+	cd 2.10 && make -f Makefile-docker iso-docker
+

@@ -31,12 +31,12 @@ kodi-docker:
 kde-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make kde'
 
-iso-docker:
-	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make iso'
-
 iso-verbose-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; DIBAB_VERBOSE_BUILD="YES"  make iso'
 
 virtualbox-docker:
 	#docker compose run -t -i ydfs2.10-modules-fast64 bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10;BUILDME=OK make virtualbox'
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10;make virtualbox'
+
+iso-docker:
+	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10;DISTRONAME=kodi make iso'
