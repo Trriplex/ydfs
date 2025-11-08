@@ -96,7 +96,7 @@ done
 
     cd build/libdvd/src/dvdnav
 	ACLOCAL_FLAGS="-I $HOME/$ARCH/share/aclocal " && ACLOCAL="aclocal -I $HOME/opkg/share/aclocal $ACLOCAL_FLAGS " autoreconf -vif || exit 1
-    cd ../libdvdread
+    cd ../dvdread
 	ACLOCAL_FLAGS="-I $HOME/$ARCH/share/aclocal " && ACLOCAL="aclocal -I $HOME/opkg/share/aclocal $ACLOCAL_FLAGS " autoreconf -vif || exit 1
     cd ../../../../
 

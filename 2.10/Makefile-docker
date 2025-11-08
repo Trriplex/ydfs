@@ -33,12 +33,13 @@ kodi-docker:
 kde-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make kde'
 
-iso-docker:
-	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make iso'
-
 iso-verbose-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} DIBAB_VERBOSE_BUILD="YES"  make iso'
 
 virtualbox-docker:
 	#docker compose run -t -i ydfs2.10-modules-fast64 bash -c '${BUILD_COMMAND} ${OPTION_BUILD}BUILDME=OK make virtualbox'
 	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make virtualbox'
+
+iso-docker:
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make iso'
+

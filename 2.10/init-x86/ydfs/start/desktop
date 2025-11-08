@@ -98,7 +98,7 @@ function start_XBMC
      echo "Asking .."
      [ -e /ydfs/modules/xfce/share ] && echo -n "FALSE XFCE " >> $HOME/.sessions
      [ -e /ydfs/modules/pantheon/share ] && echo -n "FALSE pantheon " >> $HOME/.sessions
-     [ -e /ydfs/modules/xbmc/share ] && echo -n "FALSE XBMC " >> $HOME/.sessions
+     [ -e /ydfs/modules/kodi/share ] && echo -n "FALSE XBMC " >> $HOME/.sessions
      ans=$(zenity  --height 40 --list --hide-header  --text "Choose session" --radiolist  --column "Choice" --column "Lang" TRUE mate `cat $HOME/.sessions`)
      echo "Running start_$ans" 
      start_$ans || xterm
