@@ -1,5 +1,6 @@
-#https://downloads.yoctoproject.org/releases/opkg/opkg-0.7.0.tar.gz
+https://downloads.yoctoproject.org/releases/opkg/opkg-0.7.0.tar.gz
 https://ftp.gnu.org/gnu/patch/patch-2.8.tar.xz
 https://ftp.gnu.org/gnu/make/make-4.4.1.tar.lz
 git://github.com/git/git#tag=v2.51.0
 https://download.videolan.org/vlc/3.0.21/vlc-3.0.21.tar.xz
+#inxi-3.3.39.1.tar.gz::https://codeberg.org/smxi/inxi/archive/3.3.39-1.tar.gz

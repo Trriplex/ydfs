@@ -21,7 +21,7 @@ prepare:
 
 bash:
 	cd 2.10 && make -f Makefile-docker bash-docker
-
+opkg: packages
 packages:
 	cd 2.10 && make -f Makefile-docker opkg-docker
 

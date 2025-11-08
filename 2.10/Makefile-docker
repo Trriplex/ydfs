@@ -11,32 +11,34 @@ BUILD_COMMAND=cp -a /2.10/ /tmp;cd /tmp/2.10;
 
 OPTION_BUILD=DIBAB_VERBOSE_BUILD="YES" BUILDME=OK
 OPTION_BUILD=DIBAB_VERBOSE_BUILD="YES"
+OPTION_BUILD=BUILDME=OK DIBAB_VERBOSE_BUILD=YES
 OPTION_BUILD=
 
 bash-docker:
-	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; bash'
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} bash'
 
 opkg-docker:
-	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; DISTRONAME=all BUILDOPKG=YES make opkg'
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} DISTRONAME=all BUILDOPKG=YES make opkg'
+	ls -l  ${HOME}/2.10-modules/ydfs/opkg/
 
 buildenv-docker:
-	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make buildenv'
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make buildenv'
 
 mate-docker:
-	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make mate'
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make mate'
 
 kodi-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make kodi'
 
 kde-docker:
-	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make kde'
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make kde'
 
 iso-docker:
-	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; make iso'
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make iso'
 
 iso-verbose-docker:
-	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10; DIBAB_VERBOSE_BUILD="YES"  make iso'
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} DIBAB_VERBOSE_BUILD="YES"  make iso'
 
 virtualbox-docker:
-	#docker compose run -t -i ydfs2.10-modules-fast64 bash -c 'cp -a /2.10/ /tmp;cd /tmp/2.10;BUILDME=OK make virtualbox'
-	${COMPOSE} ${DOCKER_OPTIONS} -c 'cp -a /2.10/ /tmp;cd /tmp/2.10;make virtualbox'
+	#docker compose run -t -i ydfs2.10-modules-fast64 bash -c '${BUILD_COMMAND} ${OPTION_BUILD}BUILDME=OK make virtualbox'
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make virtualbox'
