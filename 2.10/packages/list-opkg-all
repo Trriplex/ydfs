@@ -3,4 +3,5 @@ https://ftp.gnu.org/gnu/patch/patch-2.8.tar.xz
 https://ftp.gnu.org/gnu/make/make-4.4.1.tar.lz
 git://github.com/git/git#tag=v2.51.0
 https://download.videolan.org/vlc/3.0.21/vlc-3.0.21.tar.xz
-#inxi-3.3.39.1.tar.gz::https://codeberg.org/smxi/inxi/archive/3.3.39-1.tar.gz
+https://www.python.org/ftp/python/3.13.7/Python-3.13.7.tar.xz
+inxi-3.3.39.1.tar.gz::https://codeberg.org/smxi/inxi/archive/3.3.39-1.tar.gz

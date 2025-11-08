@@ -3,6 +3,7 @@ services:
         image: yledoare/ydfs-2.10
         volumes:
             - $HOME/2.10-modules/ydfs:/home/linuxconsole2024/ydfs
+            - $HOME/2.10-modules/opkg:/home/linuxconsole2024/opkg
             - $HOME/iso:/home/linuxconsole2024/iso
             - $HOME/2.10-modules/kde:/home/linuxconsole2024/kde
             - $HOME/2.10-modules/mate:/home/linuxconsole2024/mate

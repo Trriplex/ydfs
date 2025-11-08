@@ -1,0 +1,10 @@
+#bash
+#find $HOME_DIBAB/scripts/hooks
+
+install -d $PREFIX/bin
+
+[ -e inxi.1 ] && cp inxi $PREFIX/bin # && exit 0
+
+# postgresql
+
+[ -e src/bin/pg_config/pg_config.c ] && unset MAKELEVEL # && unset MAKEFLAGS && unset MFLAGS

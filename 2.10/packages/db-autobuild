@@ -141,6 +141,8 @@ else
     exit 1
   fi
 
+  . $(dirname $0)/../scripts/includes/hooks
+
   if [ -e libid3tag.list.in ]
   then
 	echo "libid3tag.list.in" && sleep 5
@@ -1914,16 +1916,6 @@ Cflags: -I${includedir}' > glm.pc
   exit 0
 
   fi
-
-  if [ -e src/backend/utils/misc/postgresql.conf.sample ]
-  then
-    echo "cp src/backend/storage/lmgr/lwlocknames.h" && install -d $HOME/$ARCH/include/storage && cp src/backend/storage/lmgr/lwlocknames.h $HOME/$ARCH/include/storage && sleep 5
-    LDFLAGS="" CFLAGS="" CPPFLAGS="-I$PWD/src/backend -I$PWD/src/backend/lmgr $CPPFLAGS" ./configure --prefix=$PREFIX --without-readline
-    # LDFLAGS="" CFLAGS="" CPPFLAGS="-I$PWD/src/backend -I$PWD/src/backend/lmgr $CPPFLAGS" LLVM_CONFIG=/usr/bin/llvm-config-9 ./configure --prefix=$PREFIX # --without-readline --with-perl --with-libxml --with-openssl  --with-python --with-tcl --with-pam --with-uuid=e2fs --with-icu --with-ldap --with-llvm --enable-nls --enable-thread-safety --disable-rpath || exit 1
-    make || bash
-    exit 1
-  fi
-
 
   [ -e src/tracker/tracker-main.c ] && sed -i "s@/etc/asciidoc@$HOME/$ARCH/etc/asciidoc@" docs/manpages/meson.build
   [ -e src/tracker/tracker-miner-manager.c ] && sed -i "s@/etc/asciidoc@$HOME/$ARCH/etc/asciidoc@" docs/manpages/meson.build
