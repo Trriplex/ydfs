@@ -11,6 +11,7 @@ prepare:
 	install -d ${HOME}/2.10-modules/mate
 	install -d ${HOME}/2.10-modules/kodi
 	install -d ${HOME}/2.10-modules/virtualbox
+	install -d ${HOME}/2.10-modules/erp
 
 	chmod 777 ${HOME}/2.10-modules/x86_64
 	chmod 777 ${HOME}/iso
@@ -20,6 +21,7 @@ prepare:
 	chmod 777 ${HOME}/2.10-modules/mate
 	chmod 777 ${HOME}/2.10-modules/kodi
 	chmod 777 ${HOME}/2.10-modules/virtualbox
+	chmod 777 ${HOME}/2.10-modules/erp
 
 	$(CMD) buildenv-docker
 
@@ -51,4 +53,7 @@ updates:
 
 live-test:
 	$(CMD) live-test-docker
+
+erp:
+	$(CMD) erp-docker
 
