@@ -10,6 +10,7 @@ services:
             - $HOME/2.10-modules/kodi:/home/linuxconsole2024/kodi
             - $HOME/2.10-modules/virtualbox:/home/linuxconsole2024/virtualbox
             - $HOME/2.10-modules/x86_64:/home/linuxconsole2024/x86_64
+            - $HOME/2.10-modules/devtools:/home/linuxconsole2024/devtools
             - $HOME/2.10-modules/erp:/home/linuxconsole2024/erp
             - ${PWD}:/2.10
         environment:

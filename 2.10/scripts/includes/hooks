@@ -11,3 +11,6 @@ install -d $PREFIX/bin
 
 # dolibarr
 pwd |grep dolibarr && [ -e htdocs ] && install -d $PREFIX/lib/ && cp -fR htdocs $PREFIX/lib/dolibarr
+
+#nodejs
+[ -e bin/node ] && cp -fR * $PREFIX && exit 0

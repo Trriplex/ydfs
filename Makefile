@@ -12,6 +12,7 @@ prepare:
 	install -d ${HOME}/2.10-modules/kodi
 	install -d ${HOME}/2.10-modules/virtualbox
 	install -d ${HOME}/2.10-modules/erp
+	install -d ${HOME}/2.10-modules/devtools
 
 	chmod 777 ${HOME}/2.10-modules/x86_64
 	chmod 777 ${HOME}/iso
@@ -22,6 +23,7 @@ prepare:
 	chmod 777 ${HOME}/2.10-modules/kodi
 	chmod 777 ${HOME}/2.10-modules/virtualbox
 	chmod 777 ${HOME}/2.10-modules/erp
+	chmod 777 ${HOME}/2.10-modules/devtools
 
 	$(CMD) buildenv-docker
 
@@ -56,4 +58,7 @@ live-test:
 
 erp:
 	$(CMD) erp-docker
+
+devtools:
+	$(CMD) devtools-docker
 

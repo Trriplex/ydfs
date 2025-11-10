@@ -1,7 +1,6 @@
 SUBARCH := $(shell uname -m | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
 				  -e s/arm.*/arm/ -e s/sa110/arm/ \
 				  -e s/s390x/s390/ -e s/parisc64/parisc/ \
-				  -e s/ppc.*/powerpc/ -e s/mips.*/mips/ \
 				  -e s/sh[234].*/sh/ )
 ARCH		?= $(SUBARCH)
 include config.ini
@@ -452,6 +451,11 @@ ${LCMBUILD}antivirus-${ARCH}.squashfs : packages/list-antivirus
 archive:
 	cd ..
 	tar czvf linuxconsole-2.4.tar.gz --exclude config.ini --exclude .git 2.4
+
+devtools: ${LCMBUILD}/devtools-${ARCH}.squashfs
+${LCMBUILD}/devtools-${ARCH}.squashfs : packages/list-devtools
+	./scripts/make_packages devtools
+	SKIP_STRIP=OK ./scripts/make_module devtools
 
 erp: ${LCMBUILD}/erp-${ARCH}.squashfs
 ${LCMBUILD}/erp-${ARCH}.squashfs : packages/list-erp
