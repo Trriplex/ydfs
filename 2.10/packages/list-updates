@@ -1,3 +1,6 @@
+#Fix https://github.com/yledoare/ydfs/issues/14
+ftp://ftp.gnu.org/gnu/grub/grub-2.12.tar.xz
+
 #php8
 https://github.com/kkos/oniguruma/releases/download/v6.9.10/onig-6.9.10.tar.gz
 

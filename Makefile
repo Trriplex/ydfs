@@ -59,6 +59,5 @@ live-test:
 erp:
 	$(CMD) erp-docker
 
-devtools:
-	$(CMD) devtools-docker
-
+iso-devtools:
+	$(CMD) iso-devtools-docker

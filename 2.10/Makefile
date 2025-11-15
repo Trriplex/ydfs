@@ -168,7 +168,7 @@ iso: isodep wineprogs ${ISOPATH} # sleep
 metalink:
 	./scripts/iso_to_metalink
 
-${ISOPATH}: ${HOME}/ydfs/build-${ARCH}/${INITRAMFS} ${LCMBUILD}/${ARCH}.squashfs ${LCMBUILD}/kodi-${ARCH}.squashfs config.ini #  ${LCMBUILD}
+${ISOPATH}: ${HOME}/ydfs/build-${ARCH}/${INITRAMFS} ${LCMBUILD}/${ARCH}.squashfs config.ini #  ${LCMBUILD}
 	./scripts/make_iso
 
 config.ini:
@@ -405,7 +405,9 @@ else
 	echo "Skip opkg"
 endif
    
+
 ${DISTRONAME}: ${LCMBUILD}${DISTRONAME}-${ARCH}.squashfs
+${DISTRONAME}: ${LCMBUILD}devtools-${ARCH}.squashfs
 ${LCMBUILD}${DISTRONAME}-${ARCH}.squashfs : packages/list-${DISTRONAME}
 	./scripts/make_packages ${DISTRONAME}
 	./scripts/make_module ${DISTRONAME}
@@ -451,11 +453,6 @@ ${LCMBUILD}antivirus-${ARCH}.squashfs : packages/list-antivirus
 archive:
 	cd ..
 	tar czvf linuxconsole-2.4.tar.gz --exclude config.ini --exclude .git 2.4
-
-devtools: ${LCMBUILD}/devtools-${ARCH}.squashfs
-${LCMBUILD}/devtools-${ARCH}.squashfs : packages/list-devtools
-	./scripts/make_packages devtools
-	SKIP_STRIP=OK ./scripts/make_module devtools
 
 erp: ${LCMBUILD}/erp-${ARCH}.squashfs
 ${LCMBUILD}/erp-${ARCH}.squashfs : packages/list-erp
