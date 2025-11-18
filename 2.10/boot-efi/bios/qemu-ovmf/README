@@ -1,0 +1,100 @@
+Running the OVMF image in qemu
+==============================
+
+The OVMF efi image is a 64 bit one, so must be run using
+
+qemu-system-x86_64 -L /usr/share/qemu-ovmf/bios
+
+Ignore the warnings about kvmapic.bin and pxe-e1000.rom
+
+The rom will boot up to an EFI shell.  If you add standard things like a USB
+drive, you can also run efi executables.
+
+To enrol the platform and key exchange keys, exit the efi shell, select
+'Device Manager' then 'Secure Boot Configuration' and change the secure boot
+mode from "Standard Mode" to "Custom Mode".  This will cause an extra "Custom
+Secure Boot Options" menu to appear from which you can enrol the Platform and
+Key Exchange keys (these need to be present on external media, like a USB
+key).
+
+Note that enroling the KEK will require you to specify a GUID.  The GUID is
+used only to identify the keys later (it's essentially the globally unique
+label for the key).  If you only enrol one KEK, you can ignore this and it
+will end up with a GUID of all zeros.
+
+
+Creating Platform and Key Exchange keys
+=======================================
+
+A note about terminology.  In UEFI terms, "key" means certificate (not the
+openssl key).  UEFI keys are required to be based on RSA 2048 bit keys.
+
+The Platform key and Key Exchange Keys should be the equivalent of CA root
+certificates (i.e. a self signed certificate).  Note that in current tianocore
+OVMF, the input certificates, if taken from external media, *must* be in a
+file with a .cer extension and in DER format.
+
+The platform key is the key which controls updates to the Key Exchange Key
+database.  The Key Exchange Key controls updates to the signature databases.
+Note that if the Key Exchange Key is an X509 key, any key which has the KEK as
+its root signature can also be used to validate an efi binary without need for
+any entries in the signatures database.
+
+
+Create Platform Key (PK)
+------------------------
+
+openssl req -new -x509 -newkey rsa:2048 -keyout PK.key -out PK.crt -days <length>
+
+Note that the Key is PK.crt (PK.key is the private key you use to sign other
+certificates)
+
+Now convert to DER format
+
+openssl x509 -in PK.crt -out PK.cer -outform DER
+
+The file PK.cer can be placed on a USB key for enrolling as the platform key.
+
+Create Key Exchange Key (KEK)
+-----------------------------
+
+This is done exactly as the Platform key above, except call the file KEK.cer
+instead.
+
+Note, for expermentation purposes, there's no reason the KEK and the PK can't
+be the same certificate.
+
+Creating derived keys from the KEK
+----------------------------------
+
+This process can be used to create subordinate keys which can be used to sign
+efi binaries (since their roots can be traced back to the KEK).
+
+openssl req -new -newkey rsa:2048 -keyout new.key -out new.csr -days <length>
+
+Now sign the certificate request with the KEK:
+
+openssl x509 -req -in new.csr -CA KEK.crt -CAkey KEK.key -set_serial 1 -out new.crt
+
+Note that since the new key doesn't have to be enrolled in the platform
+because its root of trust can be traced back to the KEK, there's no need to
+create a DER form of the key (the sbsign utilites used to sign efi binaries
+take the key.crt file which is in PEM form).
+
+Signing EFI Binaries
+====================
+
+This package contains one binary (HelloWorld.efi) which can be used to
+demonstrate the functioning of the secure boot system.  You should place this
+on a USB key (where you put the PK.cer and KEK.cer) to run it in the qemu
+environment.
+
+To sign efi binaries, you need to install the sbsigntools package.  Once this
+is done you can sign the package using the KEK (or alternatively a derived
+key) by
+
+sbsign --key KEK.key --cert KEK.crt --output HelloWorld-signed.efi HelloWorld.efi
+
+Assuming everything works fine, once you enrol the KEK and PK, you will be
+able to run HelloWorld-signed, but HelloWorld will give you an access
+denied error.
