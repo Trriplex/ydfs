@@ -56,9 +56,12 @@ updates:
 live-test:
 	$(CMD) live-test-docker
 
+test-devtools:
+	cd 2.10 && YDFS_ARCH=x86_64 DISTRONAME=devtools make config.ini && scripts/make_test
+	cd 2.10 && rm config.ini
+
 erp:
 	$(CMD) erp-docker
 
-devtools:
-	$(CMD) devtools-docker
-
+iso-devtools:
+	$(CMD) iso-devtools-docker

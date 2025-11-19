@@ -21,6 +21,25 @@ TIMEOUT 200
 '
 }
 
+print_efi_options()
+{
+DISTRONAME="test"
+echo '
+menuentry "'$DISTRONAME' LiveUSB (loopback)" {
+	set gfxpayload=keep
+	linux	/isolinux/kernel quiet liveusb ISOPATH=$iso_path ---
+	initrd	/isolinux/initramfs
+}
+menuentry "'$DISTRONAME' LiveUSB DEBUG (loopback)" {
+	set gfxpayload=keep
+	linux	/isolinux/kernel quiet liveusb ISOPATH=$iso_path debug02 rdinit=/init2 ---
+	initrd	/isolinux/initramfs
+}'
+}
+
+#print_efi_options
+#exit
+
 print_options()
 {
 
@@ -361,6 +380,7 @@ cp /$ISOTMP/iso/isolinux/$KERNEL36 /$ISOTMP/iso/isolinux/kernel
 if [ "$ARCH" = "x86_64" ]
 then 
   cp -fR boot-efi/* /$ISOTMP/iso/ || exit $?
+  print_efi_options > $ISOTMP/iso/boot/grub/loopback.cfg
   EFIBOOT=" -e /EFI/boot/efiboot.img -e boot/grub/efi.img "
 fi
 
@@ -389,6 +409,7 @@ print_other_options > /$ISOTMP/iso/isolinux/other.cfg
 print_rescue_options > /$ISOTMP/iso/isolinux/rescue.cfg
 print_help_fr > /$ISOTMP/iso/isolinux/helpfr.txt
 print_help > /$ISOTMP/iso/isolinux/help.txt
+
 
 cd /$ISOTMP/iso/
 [ -e /$ISOTMP/iso/md5sum.txt ] && rm /$ISOTMP/iso/md5sum.txt

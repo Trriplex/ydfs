@@ -16,7 +16,8 @@ then
 KERNEL_FILE=$HOME/ydfs/build/linux-$ARCH-$KERNEL3/arch/x86_64/boot/bzImage
 [ "$ARCH" = "x86" ] && KERNEL_FILE=$HOME/ydfs/build/linux-$ARCH-$KERNEL3/arch/x86/boot/bzImage
 ISO=$ISOTMP/linuxconsole"$NUM"."$LCBUILD"-"$ARCH".iso
-[ ! -e $ISO ] && echo "No $ISO" && sleep 10
+ISO=$ISOTMP/"$DISTRONAME""$NUM"."$LCBUILD"-"$ARCH".iso
+[ ! -e $ISO ] && echo "No $ISO" && exit 0
 NAME="ydfs-test"
 
 if [ -e myfix ]
