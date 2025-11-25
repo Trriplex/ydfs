@@ -65,3 +65,6 @@ erp:
 
 iso-devtools:
 	$(CMD) iso-devtools-docker
+
+qemu:
+	qemu-system-x86_64 -m size=2000 -bios 2.10/boot-efi/bios/qemu-ovmf/bios/bios.bin -cdrom /home/yann/iso/linuxconsole.iso
