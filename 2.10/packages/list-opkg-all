@@ -1,4 +1,5 @@
 #https://botan.randombit.net/releases/Botan-3.10.0.tar.xz
+s3fs-fuse-1.95.tar.gz::https://github.com/s3fs-fuse/s3fs-fuse/archive/v1.95.tar.gz
 #git://github.com/keepassxreboot/keepassxc.git
 https://downloads.yoctoproject.org/releases/opkg/opkg-0.7.0.tar.gz
 https://ftp.gnu.org/gnu/patch/patch-2.8.tar.xz
