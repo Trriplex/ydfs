@@ -454,7 +454,7 @@ archive:
 	cd ..
 	tar czvf linuxconsole-2.4.tar.gz --exclude config.ini --exclude .git 2.4
 
-erp: ${LCMBUILD}/erp-${ARCH}.squashfs
-${LCMBUILD}/erp-${ARCH}.squashfs : packages/list-erp
-	./scripts/make_packages erp
-	SKIP_STRIP=OK ./scripts/make_module erp
+openxr: ${LCMBUILD}/openxr-${ARCH}.squashfs
+${LCMBUILD}/openxr-${ARCH}.squashfs : packages/list-openxr
+	./scripts/make_packages openxr
+	SKIP_STRIP=OK ./scripts/make_module openxr

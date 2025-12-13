@@ -11,7 +11,7 @@ prepare:
 	install -d ${HOME}/2.10-modules/mate
 	install -d ${HOME}/2.10-modules/kodi
 	install -d ${HOME}/2.10-modules/virtualbox
-	install -d ${HOME}/2.10-modules/erp
+	install -d ${HOME}/2.10-modules/openxr
 	install -d ${HOME}/2.10-modules/devtools
 
 	chmod 777 ${HOME}/2.10-modules/x86_64
@@ -22,7 +22,7 @@ prepare:
 	chmod 777 ${HOME}/2.10-modules/mate
 	chmod 777 ${HOME}/2.10-modules/kodi
 	chmod 777 ${HOME}/2.10-modules/virtualbox
-	chmod 777 ${HOME}/2.10-modules/erp
+	chmod 777 ${HOME}/2.10-modules/openxr
 	chmod 777 ${HOME}/2.10-modules/devtools
 
 	$(CMD) buildenv-docker
@@ -60,8 +60,8 @@ test-devtools:
 	cd 2.10 && YDFS_ARCH=x86_64 DISTRONAME=devtools make config.ini && scripts/make_test
 	cd 2.10 && rm config.ini
 
-erp:
-	$(CMD) erp-docker
+openxr:
+	$(CMD) openxr-docker
 
 iso-devtools:
 	$(CMD) iso-devtools-docker

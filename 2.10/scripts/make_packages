@@ -1,6 +1,7 @@
 if [ "$BUILDYDFS" = "fast" ] && [ "$1" = "$ARCH" ]
 then
-  echo "Building fast $1"
+  echo "Building fast package $1"
+  sleep 10
   if [ -e $HOME/iso/$ARCH.squashfs ]
   then
     echo "Use buildt squashfs"

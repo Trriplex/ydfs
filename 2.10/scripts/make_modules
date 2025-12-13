@@ -4,7 +4,8 @@
 
 if [ "$BUILDYDFS" = "fast" ]
 then
-  echo "Building fast $1"
+  echo "Building fast module $1"
+  sleep 10
   echo "Building Grub"
   make updates || exit 17
   if [ -e $HOME/iso/$ARCH.squashfs ]
