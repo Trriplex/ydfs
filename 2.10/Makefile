@@ -173,6 +173,7 @@ ${ISOPATH}: ${HOME}/ydfs/build-${ARCH}/${INITRAMFS} ${LCMBUILD}/${ARCH}.squashfs
 
 config.ini:
 	./scripts/make_config_ini
+	ls -l config.ini
 live-test:
 	./scripts/make_live_test
 test-arm:

@@ -5,6 +5,7 @@ else
 COMPOSE=docker-compose
 endif
 
+
 DOCKER_OPTIONS=run --rm --remove-orphans ydfs2.10-modules-fast64 bash 
 DOCKER_OPTIONS=run --remove-orphans ydfs2.10-modules-fast64 bash
 BUILD_COMMAND=cp -a /2.10/ /tmp;cd /tmp/2.10;
@@ -17,8 +18,10 @@ bash-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} bash'
 
 opkg-docker:
+	chmod 777 ${HOME}/.ncftp/bookmarks
 	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} DISTRONAME=all BUILDOPKG=YES make opkg'
 	ls -l  ${HOME}/2.10-modules/ydfs/opkg/
+	chmod 700 ${HOME}/.ncftp/bookmarks
 
 buildenv-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make buildenv'

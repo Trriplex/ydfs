@@ -1,10 +1,11 @@
 cd $HOME/ydfs/opkg
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/$HOME/opkg/lib PATH=$PATH:$HOME/opkg/bin $HOME_DIBAB/tools/opkg-utils/opkg-make-index -v . > Packages
+PATH=$HOME/opkg/bin:$PATH
 [ -e /var/www/opkg/ ] && cp -fR $HOME/ydfs/opkg/* /var/www/opkg/$DISTRONAME
 HOME_DIST=`basename $HOME_DIBAB`
 echo "SEND_OPKG : $SEND_OPKG"
-
-which ncftp && SEND_OPKG = "OK"
+[ -e $HOME/.ncftp/bookmarks ] && SEND_OPKG="OK"
+echo $PATH
 
 if [ -e $HOME/ydfs/opkg ] && [ "$SEND_OPKG" = "OK" ]
 then

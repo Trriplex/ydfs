@@ -1,4 +1,6 @@
 #https://botan.randombit.net/releases/Botan-3.10.0.tar.xz
+https://www.ncftp.com/public_ftp/ncftp/ncftp-3.3.0-src.tar.gz
+git://github.com/nginx/nginx.git#tag=release-1.28.1
 s3fs-fuse-1.95.tar.gz::https://github.com/s3fs-fuse/s3fs-fuse/archive/v1.95.tar.gz
 #git://github.com/keepassxreboot/keepassxc.git
 https://downloads.yoctoproject.org/releases/opkg/opkg-0.7.0.tar.gz

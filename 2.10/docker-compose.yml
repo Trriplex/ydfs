@@ -12,6 +12,7 @@ services:
             - $HOME/2.10-modules/x86_64:/home/linuxconsole2024/x86_64
             - $HOME/2.10-modules/devtools:/home/linuxconsole2024/devtools
             - $HOME/2.10-modules/erp:/home/linuxconsole2024/erp
+            - $HOME/.ncftp:/home/linuxconsole2024/.ncftp
             - ${PWD}:/2.10
         environment:
             BUILDYDFS: "fast"
