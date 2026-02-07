@@ -1,6 +1,6 @@
 CMD=cd 2.12 && make -f Makefile-docker
 
-all: prepare packages # kde mate kodi
+all: iso
 
 prepare:
 	install -d ${HOME}/2.12-modules/x86_64

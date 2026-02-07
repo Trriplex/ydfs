@@ -6,9 +6,8 @@ COMPOSE=docker-compose
 endif
 
 
-DOCKER_OPTIONS=run --rm --remove-orphans ydfs2.10-modules-fast64 bash 
-DOCKER_OPTIONS=run --remove-orphans ydfs2.10-modules-fast64 bash
-BUILD_COMMAND=cp -a /2.10/ /tmp;cd /tmp/2.10;
+DOCKER_OPTIONS=run ydfs2.12 bash
+BUILD_COMMAND=cp -a /2.12/ /tmp;cd /tmp/2.12;
 
 OPTION_BUILD=
 OPTION_BUILD=DIBAB_VERBOSE_BUILD=YES BUILDME=OK
@@ -20,7 +19,7 @@ bash-docker:
 opkg-docker:
 	chmod 777 ${HOME}/.ncftp/bookmarks
 	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} DISTRONAME=all BUILDOPKG=YES make opkg'
-	ls -l  ${HOME}/2.10-modules/ydfs/opkg/
+	ls -l  ${HOME}/2.12-modules/ydfs/opkg/
 	chmod 700 ${HOME}/.ncftp/bookmarks
 
 buildenv-docker:
@@ -39,7 +38,7 @@ iso-verbose-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} DIBAB_VERBOSE_BUILD="YES"  make iso'
 
 virtualbox-docker:
-	#docker compose run -t -i ydfs2.10-modules-fast64 bash -c '${BUILD_COMMAND} ${OPTION_BUILD}BUILDME=OK make virtualbox'
+	#docker compose run -t -i ydfs2.12-modules-fast64 bash -c '${BUILD_COMMAND} ${OPTION_BUILD}BUILDME=OK make virtualbox'
 	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make virtualbox'
 
 iso-docker:
