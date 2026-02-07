@@ -25,8 +25,8 @@ ENV LANG fr_FR.utf8
 ENV TZ=Europe/Paris
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN useradd linuxconsole2024 --create-home
-COPY ./build-lc2024 /build-lc2024
+RUN useradd linuxconsole2026 --create-home
+COPY ./build-lc2026 /build-lc2026
 
 RUN apt-get update && apt-get install -y apt-utils
 RUN apt-get update && apt-get install -y llvm-13 libclang-13-dev clang-13
@@ -47,5 +47,5 @@ RUN apt-get install zstd
 RUN apt-get install -y curl cpuinfo
 RUN apt-get install -y rdfind
 RUN apt-get install -y rsync
-USER linuxconsole2024
-CMD /build-lc2024
+USER linuxconsole2026
+CMD /build-lc2026
