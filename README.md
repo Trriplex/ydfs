@@ -19,3 +19,5 @@ make iso
 ```
 make verbose-iso
 ```
+
+![logo](/2.12/logos/linuxconsole.png)
