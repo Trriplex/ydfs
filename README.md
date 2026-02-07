@@ -38,6 +38,7 @@ make kde
 > Build iso
 ```
 make iso
+```
 
 > Verbose build iso
 ```

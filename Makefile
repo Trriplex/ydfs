@@ -1,6 +1,6 @@
 CMD=cd 2.10 && make -f Makefile-docker
 
-all: prepare packages kde mate kodi
+all: prepare packages # kde mate kodi
 
 prepare:
 	install -d ${HOME}/2.10-modules/x86_64
