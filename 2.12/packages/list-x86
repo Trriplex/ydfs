@@ -41,7 +41,8 @@ https://deac-ams.dl.sourceforge.net/project/pcre/pcre/8.45/pcre-8.45.tar.gz
 https://github.com/PhilipHazel/pcre2/releases/download/pcre2-10.39/pcre2-10.39.tar.bz2
 https://www.python.org/ftp/python/3.10.2/Python-3.10.2.tar.xz
 https://github.com/mesonbuild/meson/releases/download/0.63.0/meson-0.63.0.tar.gz
-https://download-fallback.gnome.org/sources/glib/2.78/glib-2.78.4.tar.xz
+#https://download-fallback.gnome.org/sources/glib/2.78/glib-2.78.4.tar.xz
+git://gitlab.gnome.org/GNOME/glib.git#tag=2.78.4
 https://download.savannah.gnu.org/releases/libunwind/libunwind-1.6.2.tar.gz
 https://github.com/libfuse/libfuse/releases/download/fuse-2.9.9/fuse-2.9.9.tar.gz
 ftp://ftp.gnu.org/gnu/pth/pth-2.0.7.tar.gz
@@ -727,7 +728,7 @@ https://github.com/openjdk/jdk21u/archive/jdk-21.0.2+13.tar.gz  #SKIP-x86#
 https://github.com/openjdk/jdk17u/archive/refs/tags/jdk-17.0.11+7.tar.gz #SKIP-x86_64#
 http://plib.sourceforge.net/dist/plib-1.8.5.tar.gz
 https://ftp.gnu.org/pub/gnu/guile/guile-2.2.6.tar.gz
-git://gitlab.gnome.org/GNOME/gcab.git#commit=d8054af4381dcef17ae691775c96a60116823047
+https://gitlab.gnome.org/GNOME/gcab.git#commit=d8054af4381dcef17ae691775c96a60116823047
 git://github.com/snowballstem/snowball#commit=8c73aa900e168a96e046ec9ed6f13739c3dfacb0
 https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.7.18.tar.xz
 http://downloads.sourceforge.net/gtkspell/gtkspell3-3.0.10.tar.xz

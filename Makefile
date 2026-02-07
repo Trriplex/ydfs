@@ -1,29 +1,17 @@
 CMD=cd 2.12 && make -f Makefile-docker
 
-all: iso
+all: prepare iso
 
 prepare:
 	install -d ${HOME}/2.12-modules/x86_64
-	install -d ${HOME}/iso
 	install -d ${HOME}/2.12-modules/ydfs
-	install -d ${HOME}/2.12-modules/opkg
-	install -d ${HOME}/2.12-modules/kde
 	install -d ${HOME}/2.12-modules/mate
-	install -d ${HOME}/2.12-modules/kodi
-	install -d ${HOME}/2.12-modules/virtualbox
-	install -d ${HOME}/2.12-modules/openxr
-	install -d ${HOME}/2.12-modules/devtools
+	install -d ${HOME}/iso
 
 	chmod 777 ${HOME}/2.12-modules/x86_64
-	chmod 777 ${HOME}/iso
 	chmod 777 ${HOME}/2.12-modules/ydfs
-	chmod 777 ${HOME}/2.12-modules/opkg
-	chmod 777 ${HOME}/2.12-modules/kde
 	chmod 777 ${HOME}/2.12-modules/mate
-	chmod 777 ${HOME}/2.12-modules/kodi
-	chmod 777 ${HOME}/2.12-modules/virtualbox
-	chmod 777 ${HOME}/2.12-modules/openxr
-	chmod 777 ${HOME}/2.12-modules/devtools
+	chmod 777 ${HOME}/iso
 
 	$(CMD) buildenv-docker
 
