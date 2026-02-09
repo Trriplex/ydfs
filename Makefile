@@ -15,6 +15,9 @@ prepare:
 
 	$(CMD) buildenv-docker
 
+sh:
+	$(CMD) sh-docker
+
 bash:
 	$(CMD) bash-docker
 
