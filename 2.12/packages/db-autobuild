@@ -768,7 +768,7 @@ grep share/Surge src/common/SurgeStorage.cpp
       -Dman=auto  -Dpolkit=false -Drootlibdir=$PREFIX/lib -Drootlibexecdir=$PREFIX/lib -Dudevrulesdir=$PREFIX/lib/udev/rules.d --sysconfdir=$PREFIX/etc ../
 	PYTHONPATH="" ninja || exit $?
 	DESTDIR=/tmp/elogin PYTHONPATH="" ninja install || exit $?
-	cp -a /tmp/elogin/$HOME/* $HOME/ || exit $?
+	cp -fR /tmp/elogin/$HOME/* $HOME/ || exit $?
 	[ $ARCH = "x86" ] && cp $HOME/x86/lib64/pkgconfig/libelogind.pc  $HOME/x86/lib/pkgconfig/libelogind.pc
 	cd ..
 	touch buildok-$ARCH

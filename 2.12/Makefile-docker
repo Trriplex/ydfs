@@ -7,7 +7,7 @@ endif
 
 
 DOCKER_OPTIONS=run ydfs2.12 bash
-BUILD_COMMAND=cp -a /2.12/ /tmp;cd /tmp/2.12;
+BUILD_COMMAND=cp -a /2.12/ /tmp;cp /tmp/2.12/init-x86/etc/profile /home/linuxconsole2026/.bashrc;cd /tmp/2.12;
 
 OPTION_BUILD=DIBAB_VERBOSE_BUILD=YES BUILDME=OK
 OPTION_BUILD=DIBAB_VERBOSE_BUILD=YES

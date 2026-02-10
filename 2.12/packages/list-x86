@@ -281,7 +281,8 @@ pip::appdirs
 pip::packaging
 #Pyparsing 2 needed
 https://github.com/pyparsing/pyparsing/archive/pyparsing_2.4.7.tar.gz
-pip::setuptools
+#pip::setuptools
+pip::setuptools==80.10.2
 pip::Mako
 pip::scons
 https://github.com/intel/libva/archive/refs/tags/2.14.0.tar.gz
@@ -666,7 +667,10 @@ http://downloads.sourceforge.net/modplug-xmms/libmodplug-0.8.9.0.tar.gz
 https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.6.1/SDL2_mixer-2.6.1.tar.gz
 http://www.cabextract.org.uk/cabextract-1.6.tar.gz
 http://savannah.nongnu.org/download/icoutils/icoutils-0.31.0.tar.bz2 # playonlinux
-git://anongit.freedesktop.org/git/libxklavier#commit=396955bd2ba2db34a42b3807b03155fcc11dfe50
+https://launchpad.net/python-distutils-extra/trunk/2.39/+download/python-distutils-extra-2.39.tar.gz
+pip::setuptools==65.0.2
+https://gitlab.freedesktop.org/archived-projects/libxklavier.git#tag=libxklavier-5.4
+#pip::setuptools==80.10.2
 http://www.freedesktop.org/software/accountsservice/accountsservice-0.6.39.tar.xz
 https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz
 https://downloads.sourceforge.net/project/giflib/giflib-5.2.1.tar.gz
@@ -707,7 +711,6 @@ http://download.kde.org/stable/frameworks/5.96/extra-cmake-modules-5.96.0.tar.xz
 http://download.kde.org/stable/frameworks/5.96/oxygen-icons5-5.96.0.tar.xz
 pip::PyOpenGL
 pip::Jinja2
-https://launchpad.net/python-distutils-extra/trunk/2.39/+download/python-distutils-extra-2.39.tar.gz
 http://www.greenwoodsoftware.com/less/less-479.tar.gz
 ftp://ftp.astron.com/pub/file/file-5.24.tar.gz
 ftp://ftp.gnu.org/gnu/a2ps/a2ps-4.14.tar.gz

@@ -4,6 +4,20 @@ This branch is designed to build LinuxConsole 2026 ISO, modules and packages
 
 # Building
 
+```
+make 
+```
+
+> if errors
+```
+make bash
+```
+
+> Try building manualy, report issue on https://github.com/linuxconsole-org/ydfs/issues
+
+
+# Building - Step by step
+
 > Build Docker image
 
 ```
