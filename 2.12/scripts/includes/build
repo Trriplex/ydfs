@@ -51,7 +51,7 @@ build_ydfs_package()
   then
 	echo "Send log"
 	cp ydfs-log $PKGNAME.log.txt
-  	echo -e "$PKGNAME build in $SDURATION " >> $PKGNAME.log.txt
+  	echo -e "$PKGNAME build in $SDURATION minutes " >> $PKGNAME.log.txt
 	cpu-info >> $PKGNAME.log.txt
 	cat /sys/devices/virtual/dmi/id/board_name >> $PKGNAME.log.txt
 	cp ydfs-error $PKGNAME.error.txt
@@ -60,9 +60,9 @@ build_ydfs_package()
   fi
   if [ "$DURATION" != "0" ]
     then
-  	echo -e "$PKGNAME build in \e[94m$DURATION:$SDURATION\e[0m " 
+  	echo -e "$PKGNAME build in \e[94m$DURATION:$SDURATION\e[0m minutes" 
     else
-  	echo -e "$PKGNAME build in \e[92m$DURATION:$SDURATION\e[0m " 
+  	echo -e "$PKGNAME build in \e[92m$DURATION:$SDURATION\e[0m minutes" 
     fi
   fi
 }

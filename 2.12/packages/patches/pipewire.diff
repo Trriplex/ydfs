@@ -1,12 +1,24 @@
+diff --git a/meson.build b/meson.build
+index c3852e362..8bfd43a6e 100644
+--- a/meson.build
++++ b/meson.build
+@@ -113,7 +113,6 @@ cc_flags = common_flags + [
+   '-Werror=old-style-declaration',
+   '-Werror=old-style-definition',
+   '-Werror=missing-parameter-type',
+-  '-Werror=strict-prototypes',
+ ]
+ add_project_arguments(cc.get_supported_arguments(cc_flags), language: 'c')
+ 
 diff --git a/spa/include/spa/param/audio/raw.h b/spa/include/spa/param/audio/raw.h
-index 44429f97..e299f95b 100644
+index 457b09919..fa2522cd2 100644
 --- a/spa/include/spa/param/audio/raw.h
 +++ b/spa/include/spa/param/audio/raw.h
-@@ -32,6 +32,7 @@ extern "C" {
- #ifndef __FreeBSD__
- #include <endian.h>
+@@ -23,6 +23,7 @@ extern "C" {
+ #ifndef SPA_AUDIO_MAX_CHANNELS
+ #define SPA_AUDIO_MAX_CHANNELS	64u
  #endif
 +#include <stdint.h>
  
- #define SPA_AUDIO_MAX_CHANNELS	64u
- 
+ enum spa_audio_format {
+ 	SPA_AUDIO_FORMAT_UNKNOWN,
