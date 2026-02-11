@@ -158,11 +158,13 @@ unset CMAKE_PREFIX_PATH
 unset CXXFLAGS
 unset MAKE
      #	env | sort > /tmp/$$.env
-    bash build-mesa32 > ydfs-conf || exit 1
+    bash build-mesa32 || exit 1
+    bash build-mesa32 > ydfs-conf || exit 2
 	;;
 
     lm-sensors )
 	sed -i "s@$HOME/$ARCH@$HOME/multilib@g" Makefile
+	sed -i "s@/usr/local@$HOME/multilib@g" Makefile
 	sed -i 's/CC := gcc/CC := gcc -m32/' Makefile
         ;;
     zstd )
@@ -326,12 +328,12 @@ unset MAKE
 	make MAKEDEPPROG="${CC}" depend
     ;;
     llvm )
-	ln -s $HOME/multilib/lib/libffi.so.8 $HOME/multilib/lib/libffi.so.6
-	[ -e $HOME/llvm-multilib ] && continue
-	cd $HOME
-	[ ! -e llvm11-multilib.tar.gz ] && wget http://jukebox.linuxconsole.org/toolchains/llvm11-multilib.tar.gz
-	tar xzvhf llvm11-multilib.tar.gz
-	#	$HOME_DIBAB/scripts/build-llvm-clang
+	#ln -s $HOME/multilib/lib/libffi.so.8 $HOME/multilib/lib/libffi.so.6
+	#[ -e $HOME/llvm-multilib ] && continue
+	#cd $HOME
+	#[ ! -e llvm11-multilib.tar.gz ] && wget http://jukebox.linuxconsole.org/toolchains/llvm11-multilib.tar.gz
+	#tar xzvhf llvm11-multilib.tar.gz
+	$HOME_DIBAB/scripts/build-llvm-clang
     ;;
     cairo-1* )
 	# echo "Disable Test .." && sleep 2
@@ -477,7 +479,7 @@ unset MAKE
 	cd build-32
         PYTHONPATH="" meson ../ --prefix=$HOME/multilib -Dintrospection=false --libdir=$HOME/multilib/lib32 || exit 1
 	;;
-     glib-networking | gst-plugins-base | at-spi2-core | at-spi2-atk | libxkbcommon | libepoxy | libdrm)
+     libvdpau | glib-networking | gst-plugins-base | at-spi2-core | at-spi2-atk | libxkbcommon | libepoxy | libdrm)
 	mkdir build-32
 	cd build-32
         PYTHONPATH="" meson ../ --prefix=$HOME/multilib --libdir=$HOME/multilib/lib32 || exit 1
@@ -549,7 +551,7 @@ unset MAKE
 	cp libbz2.so.1.0 $HOME/multilib/lib
 	ln -s libbz2.so.1.0 $HOME/multilib/lib/libbz2.so
 	;;
-    json-glib | libgudev | glib-networking | libsoup-2 | polkit-1 | wayland-1 | pulseaudio-14 | p11-kit | gst-plugins-base|polkit-0|libgusb|colord|at-spi2-core|at-spi2-atk | libxkbcommon | libepoxy | gstreamer-1 | glib | libdrm | mesa-2 | libglvnd | pango-1 | atk-2 | gdk-pixbuf)
+    libvdpau | json-glib | libgudev | glib-networking | libsoup-2 | polkit-1 | wayland-1 | pulseaudio-14 | p11-kit | gst-plugins-base|polkit-0|libgusb|colord|at-spi2-core|at-spi2-atk | libxkbcommon | libepoxy | gstreamer-1 | glib | libdrm | mesa-2 | libglvnd | pango-1 | atk-2 | gdk-pixbuf | libvdpau)
   echo "Run Ninja" 
         PYTHONPATH="" ninja || exit 1
 	;;
@@ -575,7 +577,7 @@ unset MAKE
 	;;
    llvm )
 	;;
-   json-glib | libgudev | glib-networking | libsoup-2 | polkit-1 | wayland-1 | pulseaudio-14 | p11-kit | gst-plugins-base|polkit-0|libgusb|colord|+-3|at-spi2-core|at-spi2-atk|libxkbcommon | libepoxy | gstreamer-1 | glib-2 | mesa-2 | libdrm | libglvnd | pango-1 | atk-2 | gdk-pixbuf )
+   libvdpau | json-glib | libgudev | glib-networking | libsoup-2 | polkit-1 | wayland-1 | pulseaudio-14 | p11-kit | gst-plugins-base|polkit-0|libgusb|colord|+-3|at-spi2-core|at-spi2-atk|libxkbcommon | libepoxy | gstreamer-1 | glib | mesa-2 | libdrm | libglvnd | pango-1 | atk-2 | gdk-pixbuf )
   	echo "Do nothing for $PKG"
 	;;
     * )
@@ -607,7 +609,7 @@ unset MAKE
 
 	cd ..
 	;;
-    json-glib | libgudev | glib-networking | libsoup-2 | polkit-1 | wayland-1 | pulseaudio-14 | p11-kit | gst-plugins-base|polkit-0|libgusb|colord|at-spi2-core|at-spi2-atk|libxkbcommon | libepoxy | gstreamer-1 | glib-2 | libdrm | libglvnd | pango-1 | atk-2 | gdk-pixbuf)
+    libvdpau | json-glib | libgudev | glib-networking | libsoup-2 | polkit-1 | wayland-1 | pulseaudio-14 | p11-kit | gst-plugins-base|polkit-0|libgusb|colord|at-spi2-core|at-spi2-atk|libxkbcommon | libepoxy | gstreamer-1 | glib | libdrm | libglvnd | pango-1 | atk-2 | gdk-pixbuf)
   	echo "Run ninja install "
         PYTHONPATH="" ninja install || exit 1
 	cd ..

@@ -8,7 +8,6 @@ else
 BUILDING=prepare iso
 endif
 
-
 all: $(BUILDING) #fail prepare iso
 
 echo:
@@ -77,5 +76,10 @@ iso-devtools:
 
 qemu:
 	qemu-system-x86_64 -m size=2000 -bios 2.12/boot-efi/bios/qemu-ovmf/bios/bios.bin -cdrom /home/yann/iso/linuxconsole.iso
+
 nodocker:
 	cd 2.12 && make iso
+
+multilib:
+	$(CMD) multilib-docker
+

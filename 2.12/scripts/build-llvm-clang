@@ -4,10 +4,10 @@
 	[ ! -e ../src/llvm-$RELEASE.src ] && cd ../src/ && tar -xJf ../tarballs/llvm-$RELEASE.src.tar.xz
 	cd $HOME/ydfs/src/llvm-$RELEASE.src/tools || exit 1
 
-	[ ! -e cfe-$RELEASE.src.tar.xz ] && wget https://github.com/llvm/llvm-project/releases/download/llvmorg-$RELEASE/cfe-$RELEASE.src.tar.xz 
-	[ ! -e cfe-$RELEASE.src ] && tar -xJf cfe-$RELEASE.src.tar.xz
-	[ ! -e clang-$RELEASE.src ] && tar -xJf clang-$RELEASE.src.tar.xz
-	[ ! -e clang ] && mv clang-$RELEASE.src clang 
+#	[ ! -e cfe-$RELEASE.src.tar.xz ] && wget https://github.com/llvm/llvm-project/releases/download/llvmorg-$RELEASE/cfe-$RELEASE.src.tar.xz 
+#	[ ! -e cfe-$RELEASE.src ] && tar -xJf cfe-$RELEASE.src.tar.xz
+#	[ ! -e clang-$RELEASE.src ] && tar -xJf clang-$RELEASE.src.tar.xz
+#	[ ! -e clang ] && mv clang-$RELEASE.src clang 
 
 	cd ..
 	sed -i '/add_clang_subdirectory(clang-shlib)/d' tools/CMakeLists.txt
@@ -37,18 +37,4 @@
  	ninja all || exit $?
 	# DESTDIR="$HOME/llvm-multilib" ninja install
 	ninja install || exit 1
-
-exit 0
-
-
-rules.ninja => Ajout ldl Si CIndexer.cpp:(.text._ZN5clang8CIndexer21getClangResourcesPathB5cxx11Ev+0x73): undefined reference to `dladdr'
-
-
-#############################################
-# Rule for linking CXX shared library.
-
-rule CXX_SHARED_LIBRARY_LINKER__libclang
-  command = $PRE_LINK && /usr/bin/c++ -fPIC $LANGUAGE_COMPILE_FLAGS $ARCH_FLAGS $LINK_FLAGS -shared $SONAME_FLAG$SONAME -ldl -o $TARGET_FILE $in $LINK_PATH $LINK_LIBRARIES && $POST_BUILD
-  description = Linking CXX shared library $TARGET_FILE
-  restat = $RESTAT
 
