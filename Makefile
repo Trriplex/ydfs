@@ -1,16 +1,34 @@
 CMD=cd 2.12 && make -f Makefile-docker
 
-all: prepare iso
+HASDOCKER := $(shell which ddocker)
+
+ifeq ($(HASDOCKER),"")
+BUILDING=nodocker
+else
+BUILDING=prepare iso
+endif
+
+
+all: $(BUILDING) #fail prepare iso
+
+echo:
+	echo test
+	echo "-"$(HASDOCKER)"-"
+	echo $(BUILDING)
 
 prepare:
+	install -d ${HOME}/2.12-modules/multilib
 	install -d ${HOME}/2.12-modules/x86_64
 	install -d ${HOME}/2.12-modules/ydfs
 	install -d ${HOME}/2.12-modules/mate
+	install -d ${HOME}/2.12-modules/kde
 	install -d ${HOME}/iso
 
+	chmod 777 ${HOME}/2.12-modules/multilib
 	chmod 777 ${HOME}/2.12-modules/x86_64
 	chmod 777 ${HOME}/2.12-modules/ydfs
 	chmod 777 ${HOME}/2.12-modules/mate
+	chmod 777 ${HOME}/2.12-modules/kde
 	chmod 777 ${HOME}/iso
 
 	$(CMD) buildenv-docker
@@ -59,3 +77,5 @@ iso-devtools:
 
 qemu:
 	qemu-system-x86_64 -m size=2000 -bios 2.12/boot-efi/bios/qemu-ovmf/bios/bios.bin -cdrom /home/yann/iso/linuxconsole.iso
+nodocker:
+	cd 2.12 && make iso

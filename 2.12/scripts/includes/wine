@@ -1,7 +1,11 @@
 if [ -e programs/winecfg ] && [ "$ARCH" == "x86_64" ]
 then
-	echo "First Multilib build"
-	bash $HOME_DIBAB/scripts/make_multilib 
+	#clang bug on Wine 11
+	#https://github.com/llvm/llvm-project/issues/64874
+	export CC=gcc
+
+	# echo "First Multilib build"
+	bash $HOME_DIBAB/scripts/make_multilib || exit 1
 	# FIXME !
 	# Why references to x86_86/lib instead of multilib/lib for libz.o ??
 	echo "Clean mesa build-32"

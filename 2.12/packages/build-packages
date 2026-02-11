@@ -251,7 +251,8 @@ fi
     [ -e $HOME/ydfs-error ] && tail ydfs-error && echo "Exit $ARCHIVE " && break
     continue
   fi
-  if [  -n "`echo $ARCHIVE | grep 'git://'`" ] || [  -n "`echo $ARCHIVE | grep 'opkg-gtk2.git'`" ] \
+  if [  -n "`echo $ARCHIVE | grep 'git://'`" ]  \
+	  || [  -n "`echo $ARCHIVE | grep 'opkg-gtk2.git'`" ] \
 	  || [  -n "`echo $ARCHIVE | grep 'https://gitlab.freedesktop.org/archived-projects/libxklavier.git'`" ] \
 	  || [  -n "`echo $ARCHIVE | grep 'https://gitlab.freedesktop.org/vdpau/libvdpau.git'`" ] \
 	  || [  -n "`echo $ARCHIVE | grep 'https://gitlab.freedesktop.org/virgl/virglrenderer.git'`" ] \
@@ -263,7 +264,7 @@ fi
 	  || [  -n "`echo $ARCHIVE | grep 'https://gitlab.gnome.org/GNOME/gcab.git'`" ] \
 	  || [  -n "`echo $ARCHIVE | grep 'https://gitlab.gnome.org/GNOME/vala.git'`" ] \
 	  || [  -n "`echo $ARCHIVE | grep 'https://gitlab.gnome.org/GNOME/sysprof.git'`" ] \
-	  || [  -n "`echo $ARCHIVE | grep 'https://gitlab.gnome.org/GNOME/libgnomekbd.git'`" ] \
+	  || [  -n "`echo $ARCHIVE | grep 'https://gitlab.gnome.org/Archive/libgnomekbd.git'`" ] \
 	  || [  -n "`echo $ARCHIVE | grep 'https://gitlab.gnome.org/GNOME/libgsf.git'`" ] \
 	  || [  -n "`echo $ARCHIVE | grep 'https://gitlab.gnome.org/GNOME/mutter.git'`" ] \
 	  || [  -n "`echo $ARCHIVE | grep 'https://gitlab.gnome.org/GNOME/libgweather.git'`" ] \
@@ -383,6 +384,11 @@ fi
 #  echo $ARCHIVE | grep icu4c && export CXX="g++ -fPIC"
 #  echo $ARCHIVE | grep zlib- && export CC="gcc -fPIC"
   echo $ARCHIVE | grep plib && export CXX="g++ -fPIC"
+
+  #clang bug on Wine 11
+  #https://github.com/llvm/llvm-project/issues/64874
+  echo $ARCHIVE | grep wine-11 && export CC=gcc && export x86_64_CC=gcc
+
   echo $ARCHIVE | grep dssi && export CXX="g++ -fPIC -I$HOME/$ARCH/include"
   echo $ARCHIVE | grep perl-5 && export CFLAGS="-I$HOME/$ARCH/include" && export CXXFLAGS=$CFLAGS && export CPPFLAGS=$CFLAGS
   echo $ARCHIVE | grep SDL_Pango && export LDFLAGS="$LDFLAGS -fPIC" && export CFLAGS="$CFLAGS -fPIC"

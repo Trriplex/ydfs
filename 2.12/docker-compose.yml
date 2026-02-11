@@ -7,6 +7,8 @@ services:
             - $HOME/iso:/home/linuxconsole2026/iso
             - $HOME/2.12/mate:/home/linuxconsole2026/mate
             - $HOME/2.12/x86_64:/home/linuxconsole2026/x86_64
+            - $HOME/2.12/multilib:/home/linuxconsole2026/multilib
+            - $HOME/2.12/kde:/home/linuxconsole2026/kde
             - ${PWD}:/2.12
         environment:
             YDFS_ARCH: "x86_64"
@@ -21,14 +23,11 @@ services:
             - $HOME/2.12/ydfs:/home/linuxconsole2026/ydfs
             - $HOME/2.12/opkg:/home/linuxconsole2026/opkg
             - $HOME/iso:/home/linuxconsole2026/iso
-            - $HOME/2.12/kde:/home/linuxconsole2026/kde
             - $HOME/2.12/mate:/home/linuxconsole2026/mate
-            - $HOME/2.12/kodi:/home/linuxconsole2026/kodi
-            - $HOME/2.12/virtualbox:/home/linuxconsole2026/virtualbox
             - $HOME/2.12/x86_64:/home/linuxconsole2026/x86_64
-            - $HOME/2.12/devtools:/home/linuxconsole2026/devtools
-            - $HOME/2.12/erp:/home/linuxconsole2026/erp
-            - $HOME/.ncftp:/home/linuxconsole2026/.ncftp
+            - $HOME/2.12/multilib:/home/linuxconsole2026/multilib
+            - $HOME/2.12/kde:/home/linuxconsole2026/kde
+              #- $HOME/.ncftp:/home/linuxconsole2026/.ncftp
             - ${PWD}:/2.12
         environment:
             BUILDYDFS: "fast"

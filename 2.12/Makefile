@@ -383,7 +383,7 @@ ${LCMBUILD}unfa-${ARCH}.squashfs : packages/list-unfa
 	./scripts/make_module unfa
    
 multilib: 
-	./scripts/make_multilib
+	./scripts/make_multilib # || ./scripts/make_multilib
 dist: 
 	./scripts/make_opkg_filelist opkg
 fixopkg:

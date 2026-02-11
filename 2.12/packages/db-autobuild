@@ -1997,6 +1997,8 @@ libusbmuxd.pc.in libuv.pc.in NetworkManager-pptp.doap elfutils.spec src/a52dec.c
 env > ydfs.env
 echo "LD_LIBRARY_PATH : $LD_LIBRARY_PATH"
 echo "CFLAGS: $CFLAGS"
+echo "CC: $CC"
+echo "x86_64_CC: $x86_64_CC"
 echo "$PWD : Run $SOURCEDIR/configure $MYPREFIX $LC_CONFIGURE_OPTS "
     if [ "$ARCH" = "arm" ]
     then

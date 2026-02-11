@@ -18,7 +18,7 @@ http://people.redhat.com/sgrubb/libcap-ng/libcap-ng-0.7.8.tar.gz
 https://downloads.sourceforge.net/sourceforge/libtirpc/libtirpc-1.3.2.tar.bz2
 https://github.com/linux-pam/linux-pam/releases/download/v1.5.2/Linux-PAM-1.5.2.tar.xz
 https://github.com/besser82/libxcrypt//releases/download/v4.4.28/libxcrypt-4.4.28.tar.xz
-https://www.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.tar.xz
+git://github.com/util-linux/util-linux#tag=v2.41.3
 https://dlcdn.apache.org/apr/apr-1.7.0.tar.bz2
 https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.45.4/e2fsprogs-1.45.4.tar.xz
 https://frippery.org/uml/zerofree-1.1.1.tgz
@@ -741,11 +741,6 @@ https://download.gnome.org/sources/libunique/3.0/libunique-3.0.2.tar.xz
 ftp://ftp.mars.org/pub/mpeg/libid3tag-0.15.1b.tar.gz
 https://downloads.xiph.org/releases/libshout/libshout-2.4.3.tar.gz
 https://people.redhat.com/sgrubb/audit/audit-3.0.7.tar.gz
-#Wine
-#https://dl.winehq.org/wine/source/9.x/wine-9.3.tar.xz
-#https://github.com/Winetricks/winetricks/archive/20160724.tar.gz
-#http://packages.linuxmint.com/pool/main/w/wine-installer/wine-installer_4.0.5.tar.xz
-#http://breakfastquay.com/files/releases/10/dssi-vst-0.9.2.tar.bz2
 https://tls.mbed.org/download/mbedtls-2.16.0-gpl.tgz
 git://github.com/Aorimn/dislocker.git#commit=3e7aea196eaa176c38296a9bc75c0201df0a3679
 http://downloads.sourceforge.net/strace/strace-4.20.tar.xz
@@ -837,6 +832,8 @@ https://ftp.gnome.org/pub/GNOME/sources/gtkmm/2.24/gtkmm-2.24.5.tar.xz
 https://github.com/mltframework/mlt/archive/v6.20.0.tar.gz #SKIP-x86_64#
 https://github.com/mltframework/mlt/releases/download/v7.8.0/mlt-7.8.0.tar.gz #SKIP-x86#
 git://github.com/google/woff2#commit=1bccf208bca986e53a647dfe4811322adb06ecf8
+https://github.com/fukuchi/libqrencode/archive/refs/tags/v4.1.1.tar.gz
+https://github.com/Qalculate/libqalculate/releases/download/v4.3.0/libqalculate-4.3.0.tar.gz
 https://download.kde.org/stable/frameworks/5.96/attica-5.96.0.tar.xz 
 https://download.kde.org/stable/frameworks/5.96/kdbusaddons-5.96.0.tar.xz 
 https://download.kde.org/stable/frameworks/5.96/kconfig-5.96.0.tar.xz 
@@ -951,10 +948,12 @@ https://github.com/Pulse-Eight/platform/archive/p8-platform-2.1.0.1.tar.gz
 libcec-6.0.2.tar.gz::https://github.com/Pulse-Eight/libcec/archive/libcec-6.0.2.tar.gz
 https://github.com/zeux/pugixml/releases/download/v1.12.1/pugixml-1.12.1.tar.gz
 https://github.com/NilsBrause/waylandpp/archive/1.0.0.zip
-https://github.com/fwupd/fwupd.git#tag#tag=1.8.7
+https://ftp.postgresql.org/pub/source/v18.1/postgresql-18.1.tar.bz2
+pip::psycopg2==2.9.2
+git://github.com/fwupd/fwupd.git#tag=1.8.7
 https://downloads.sourceforge.net/project/freeimage/Source%20Distribution/3.18.0/FreeImage3180.zip
 #Cinnamon
-https://gitlab.gnome.org/GNOME/libgnomekbd.git#commit=1ca55e9f3644eb20ccee1042a7fa4158465f4aef
+https://gitlab.gnome.org/Archive/libgnomekbd.git#commit=1ca55e9f3644eb20ccee1042a7fa4158465f4aef
 #dbusmenu16.10-r498.tar.gz::https://bazaar.launchpad.net/~dbusmenu-team/libdbusmenu/trunk.16.10/tarball/498
 http://jukebox.linuxconsole.org/sources/libdbusmenu.tar.gz
 https://github.com/linuxmint/xapp/archive/2.8.2/xapp-2.8.2.tar.gz
@@ -963,11 +962,19 @@ https://gitlab.gnome.org/GNOME/libgsf.git#commit=ea9d8cd1369661bf62d0476474700a9
 git://github.com/CanonicalLtd/lightdm.git#tag=9e72b5b3072ff9990211f35aa2a48e971ff710c7
 #lightdm-slick-greeter-2.0.3.tar.gz::https://github.com/linuxmint/slick-greeter/archive/2.0.3.tar.gz
 https://github.com/jordansissel/xdotool/releases/download/v3.20211022.1/xdotool-3.20211022.1.tar.gz
+##STOP
+#Wine
+#https://dl.winehq.org/wine/source/9.x/wine-9.3.tar.xz
+https://dl.winehq.org/wine/source/11.x/wine-11.1.tar.xz
+https://github.com/Winetricks/winetricks/archive/20160724.tar.gz
+http://packages.linuxmint.com/pool/main/w/wine-installer/wine-installer_4.0.5.tar.xz
+http://breakfastquay.com/files/releases/10/dssi-vst-0.9.2.tar.bz2
 #Last build
 https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-17.0.tar.xz
 git://github.com/falkTX/Carla.git#tag=v2.4.3 #SKIP-x86_64#
 git://github.com/falkTX/Carla.git#tag=v2.5.0 #SKIP-x86#
 #Warning, unset LDFLAGS for building grub
 ftp://ftp.gnu.org/gnu/grub/grub-2.14.tar.xz
+FAIL
 #END-linuxconsole
 ##STOP

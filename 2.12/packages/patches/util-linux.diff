@@ -1,0 +1,13 @@
+diff --git a/term-utils/Makemodule.am b/term-utils/Makemodule.am
+index a0ebd077e..94a4a3eac 100644
+--- a/term-utils/Makemodule.am
++++ b/term-utils/Makemodule.am
+@@ -110,8 +110,6 @@ if USE_TTY_GROUP
+ if MAKEINSTALL_DO_CHOWN
+ if MAKEINSTALL_DO_TTY_SETGID
+ install-exec-hook-wall::
+-	chgrp tty $(DESTDIR)$(usrbin_execdir)/wall
+-	chmod g+s $(DESTDIR)$(usrbin_execdir)/wall
+ 
+ INSTALL_EXEC_HOOKS += install-exec-hook-wall
+ endif
