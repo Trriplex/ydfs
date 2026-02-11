@@ -4,10 +4,10 @@
 	[ ! -e ../src/llvm-$RELEASE.src ] && cd ../src/ && tar -xJf ../tarballs/llvm-$RELEASE.src.tar.xz
 	cd $HOME/ydfs/src/llvm-$RELEASE.src/tools || exit 1
 
-#	[ ! -e cfe-$RELEASE.src.tar.xz ] && wget https://github.com/llvm/llvm-project/releases/download/llvmorg-$RELEASE/cfe-$RELEASE.src.tar.xz 
-#	[ ! -e cfe-$RELEASE.src ] && tar -xJf cfe-$RELEASE.src.tar.xz
-#	[ ! -e clang-$RELEASE.src ] && tar -xJf clang-$RELEASE.src.tar.xz
-#	[ ! -e clang ] && mv clang-$RELEASE.src clang 
+	[ ! -e clang ] && [ ! -e clang-$RELEASE.src.tar.xz ] && wget https://github.com/llvm/llvm-project/releases/download/llvmorg-$RELEASE/clang-$RELEASE.src.tar.xz 
+	[ ! -e clang ] && [ ! -e clang-$RELEASE.src ] && tar -xJf clang-$RELEASE.src.tar.xz && rm clang-$RELEASE.src.tar.xz
+	[ ! -e clang ] && mv clang-$RELEASE.src clang 
+	[ ! -e clang ] && exit 2
 
 	cd ..
 	sed -i '/add_clang_subdirectory(clang-shlib)/d' tools/CMakeLists.txt
@@ -27,13 +27,14 @@
     -DLLVM_ENABLE_RTTI=ON \
     -DLLVM_ENABLE_FFI=ON \
     -DLLVM_BUILD_DOCS=OFF \
-    -DCLANG_LINK_CLANG_DYLIB=OFF \
+    -DCLANG_LINK_CLANG_DYLIB=ON \
     -DLLVM_BUILD_TESTS=OFF \
     -DLLVM_ENABLE_SPHINX=OFF \
     -DLLVM_ENABLE_DOXYGEN=OFF \
     -DLLVM_MAIN_SRC_DIR="$HOME/ydfs/src/llvm-$RELEASE.src" \
     -DFFI_LIBRARY_DIR=$HOME/multilib/lib32 \
     -DFFI_INCLUDE_DIR=$($HOME/x86_64/bin/pkg-config --variable=includedir libffi)  || exit $?
+	# bash
  	ninja all || exit $?
 	# DESTDIR="$HOME/llvm-multilib" ninja install
 	ninja install || exit 1

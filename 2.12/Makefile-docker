@@ -11,7 +11,14 @@ BUILD_COMMAND=install -d /tmp/ydfs;cp -fR 2.12/* /tmp/ydfs;cp /tmp/ydfs/init-x86
 
 OPTION_BUILD=DIBAB_VERBOSE_BUILD=YES BUILDME=OK
 OPTION_BUILD=DIBAB_VERBOSE_BUILD=YES
+OPTION_BUILD=MENUCONFIG=YES
 OPTION_BUILD=
+
+linux-docker:
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make linux'
+
+busybox-docker:
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make busybox'
 
 sh-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} /usr/bin/sh'

@@ -1,7 +1,6 @@
 # rm /home/linuxconsole25/ydfs/src/icu/source/ydfs-multilib-buildt
 
 export PYTHON=/usr/bin/python3
-#export PYTHON2=/usr/bin/python
 unset PYTHONPATH
 export PATH=$HOME/llvm-multilib/bin/:$HOME/multilib/bin:$HOME/x86_64/bin/:$PATH
 export PKG_CONFIG_PATH=$HOME/multilib/lib/pkgconfig:$HOME/multilib/lib32/pkgconfig:$HOME/multilib/share/pkgconfig:/usr/share/pkgconfig/
@@ -19,10 +18,7 @@ install -d $HOME/multilib/include
 
 [ ! -e $HOME/multilib/lib32 ] && ln -s $HOME/$ARCH/lib32 $HOME/multilib/lib32
 [ ! -e $HOME/multilib/lib ] && ln -s $HOME/$ARCH/lib32 $HOME/multilib/lib
-
   
-# libFS-1 libdmx- \
-
 PKGMULTILIB="zlib-1 gmp xz-5 libunwind libunistring libtasn1 libidn nettle xorgproto alsa-lib ncurses readline libxcrypt pcre- pcre2 tcl8 sqlite util-linux libpng-1.2 libpng-1.6 libffi p11-kit zstd gnutls openssl-1 curl elfutils expat dbus-1.12.20 glib freetype-2 icu harfbuzz freetype-2 json-c fontconfig-2 \
 xtrans libXau libpthread-stubs xcb-proto libxcb \
 libX11-1 \
@@ -58,7 +54,6 @@ unixODBC libtheora libcap-2 at-spi2-core at-spi2-atk libepoxy libxkbcommon libgu
 
 for PKG in $PKGMULTILIB
 do
-
   [ "$PKG" = "llvm" ] && install -d $HOME/ydfs/src/$PKG && continue
   echo -n "Test $PKG dir " # && sleep 1
   [ -e $HOME/ydfs/src/$PKG ] && continue
@@ -70,8 +65,6 @@ done
 
 for PKG in $PKGMULTILIB
 do
-# [ "$PKG" = "soxr" ] && continue
-
   echo -n "$PKG " # && sleep 1
   cd $HOME/ydfs/src/$PKG || cd $HOME/ydfs/src/$PKG* || exit $?
 
@@ -107,16 +100,11 @@ do
   esac
   case $PKG in
     mesa-2 )
-	# export CC="gcc -m32"
-  	# export CXX="g++ -m32"
 	mkdir build-32
 	cd build-32
-	# [ ! -e env.1 ] && env > env.1 && echo "Quit building .. " && exit 23 # We need to clear ENV VAR
 	echo "Start config mesa .. "
-	# env > env.2
 	echo "[binaries]
 llvm-config = '$HOME/llvm-multilib/bin/llvm-config' "> crossfile.ini
-        # PYTHONPATH="" 
         echo "export PATH=/home/linuxconsole2026/llvm-multilib/:$PATH" > build-mesa32
 	echo "meson ../ --prefix=$HOME/multilib --libdir=$HOME/multilib/lib32 --native-file crossfile.ini \
     -D b_lto=false \
@@ -149,8 +137,8 @@ llvm-config = '$HOME/llvm-multilib/bin/llvm-config' "> crossfile.ini
     -D microsoft-clc=disabled \
     -D lmsensors=enabled \
     -D valgrind=disabled" >> build-mesa32
-    bash
-    # $HOME_DIBAB/scripts/clear-env && . $HOME/env
+#echo libclang-cpp.so
+#    bash
 unset ACLOCAL
 unset ACLOCAL_FLAGS
 unset CMAKE_INCLUDE_PATH
@@ -158,7 +146,6 @@ unset CMAKE_LIBRARY_PATH
 unset CMAKE_PREFIX_PATH
 unset CXXFLAGS
 unset MAKE
-     #	env | sort > /tmp/$$.env
     bash build-mesa32 || exit 1
     bash build-mesa32 > ydfs-conf || exit 2
 	;;
@@ -334,7 +321,8 @@ unset MAKE
 	#cd $HOME
 	#[ ! -e llvm11-multilib.tar.gz ] && wget http://jukebox.linuxconsole.org/toolchains/llvm11-multilib.tar.gz
 	#tar xzvhf llvm11-multilib.tar.gz
-	$HOME_DIBAB/scripts/build-llvm-clang
+	echo "Build $HOME_DIBAB/scripts/build-llvm-clang"
+	$HOME_DIBAB/scripts/build-llvm-clang || exit 4
     ;;
     cairo-1* )
 	# echo "Disable Test .." && sleep 2

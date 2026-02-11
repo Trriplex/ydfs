@@ -1,4 +1,4 @@
-#JUMP
+##JUMP
 https://github.com/nghttp2/nghttp2/releases/download/v1.41.0/nghttp2-1.41.0.tar.xz
 https://bitbucket.org/multicoreware/x265_git/downloads/x265_3.3.tar.gz
 http://ftp.gnu.org/gnu/gdbm/gdbm-1.23.tar.gz
@@ -977,7 +977,7 @@ https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-17.0.tar.xz
 git://github.com/falkTX/Carla.git#tag=v2.4.3 #SKIP-x86_64#
 git://github.com/falkTX/Carla.git#tag=v2.5.0 #SKIP-x86#
 #Warning, unset LDFLAGS for building grub
+#pip::setuptools==80.10.2
 ftp://ftp.gnu.org/gnu/grub/grub-2.14.tar.xz
-FAIL
 #END-linuxconsole
-##STOP
+#STOP
