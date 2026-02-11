@@ -117,6 +117,7 @@ do
 	echo "[binaries]
 llvm-config = '$HOME/llvm-multilib/bin/llvm-config' "> crossfile.ini
         # PYTHONPATH="" 
+        echo "export PATH=/home/linuxconsole2026/llvm-multilib/:$PATH" > build-mesa32
 	echo "meson ../ --prefix=$HOME/multilib --libdir=$HOME/multilib/lib32 --native-file crossfile.ini \
     -D b_lto=false \
     -D b_ndebug=true \
@@ -147,8 +148,8 @@ llvm-config = '$HOME/llvm-multilib/bin/llvm-config' "> crossfile.ini
     -D shared-glapi=enabled \
     -D microsoft-clc=disabled \
     -D lmsensors=enabled \
-    -D valgrind=disabled" > build-mesa32
-    #bash
+    -D valgrind=disabled" >> build-mesa32
+    bash
     # $HOME_DIBAB/scripts/clear-env && . $HOME/env
 unset ACLOCAL
 unset ACLOCAL_FLAGS
@@ -627,7 +628,7 @@ done
 
 cp -a /usr/lib32/* $HOME/$ARCH/lib32
 cp -a /usr/lib32 $HOME/$ARCH/lib32-root
-cp $HOME/llvm-multilib/lib32/libLLVM-11.so $HOME/$ARCH/lib32 || exit 1
+cp $HOME/llvm-multilib/lib32/libLLVM-13.so $HOME/$ARCH/lib32 || exit 1
 
 ls $HOME/$ARCH/lib32/*.a |while read file
 do

@@ -21,9 +21,11 @@ prepare:
 	install -d ${HOME}/2.12-modules/ydfs
 	install -d ${HOME}/2.12-modules/mate
 	install -d ${HOME}/2.12-modules/kde
+	install -d ${HOME}/2.12-modules/llvm-multilib
 	install -d ${HOME}/iso
 
 	chmod 777 ${HOME}/2.12-modules/multilib
+	chmod 777 ${HOME}/2.12-modules/llvm-multilib
 	chmod 777 ${HOME}/2.12-modules/x86_64
 	chmod 777 ${HOME}/2.12-modules/ydfs
 	chmod 777 ${HOME}/2.12-modules/mate
