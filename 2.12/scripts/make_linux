@@ -43,7 +43,18 @@ then
   [ ! -e $BUILD_DIR/.config ] && cp /$HOME_DIBAB/config/kernel-raspi/config  $BUILD_DIR/.config
   [ "$MENUCONFIG" = "YES" ] && echo "make menuconfig" && make menuconfig O=$BUILD_DIR && cp $BUILD_DIR/.config /$HOME_DIBAB/config/kernel-raspi/config
   echo "make kernel"
+
+MAXMEMORY=$(cat /proc/meminfo |grep MemTotal | cut -d':' -f2 | tr -s ' ' | cut -d' ' -f2)
+MAXMEMORYGIGA=$(expr $MAXMEMORY / 1024 / 1024)
+if [ $MAXMEMORYGIGA -gt 10 ]
+then
+  echo High mem
   make O=$BUILD_DIR -k -j5 
+else
+  echo Low mem
+  make O=$BUILD_DIR -k -j2 
+fi
+
   exit $?
 #  make modules  O=$BUILD_DIR || exit 1
 fi

@@ -1,0 +1,8 @@
+MAXMEMORY=$(cat /proc/meminfo |grep MemTotal | cut -d':' -f2 | tr -s ' ' | cut -d' ' -f2)
+MAXMEMORYGIGA=$(expr $MAXMEMORY / 1024 / 1024)
+if [ $MAXMEMORYGIGA -gt 10 ]
+then
+  echo High
+else
+  echo Low
+fi

@@ -35,7 +35,16 @@
     -DFFI_LIBRARY_DIR=$HOME/multilib/lib32 \
     -DFFI_INCLUDE_DIR=$($HOME/x86_64/bin/pkg-config --variable=includedir libffi)  || exit $?
 	# bash
- 	ninja all || exit $?
+MAXMEMORY=$(cat /proc/meminfo |grep MemTotal | cut -d':' -f2 | tr -s ' ' | cut -d' ' -f2)
+MAXMEMORYGIGA=$(expr $MAXMEMORY / 1024 / 1024)
+if [ $MAXMEMORYGIGA -gt 10 ]
+then
+  echo High
+  ninja all -j5 || exit $?
+else
+  echo Low
+  ninja all -j2 || exit $?
+fi
 	# DESTDIR="$HOME/llvm-multilib" ninja install
 	ninja install || exit 1
 
