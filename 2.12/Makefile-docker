@@ -7,7 +7,7 @@ endif
 
 
 DOCKER_OPTIONS=run ydfs2.12 bash
-BUILD_COMMAND=install -d /tmp/ydfs;cp -fR 2.12/* /tmp/ydfs;cp /tmp/ydfs/init-x86/etc/profile /home/linuxconsole2026/.bashrc;cd /tmp/ydfs;
+BUILD_COMMAND=install -d /tmp/ydfs;cp -a 2.12/* /tmp/ydfs;cp /tmp/ydfs/init-x86/etc/profile /home/linuxconsole2026/.bashrc;cd /tmp/ydfs;
 
 OPTION_BUILD=DIBAB_VERBOSE_BUILD=YES BUILDME=OK
 OPTION_BUILD=DIBAB_VERBOSE_BUILD=YES

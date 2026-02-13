@@ -168,12 +168,13 @@ iso: isodep wineprogs ${ISOPATH} # sleep
 metalink:
 	./scripts/iso_to_metalink
 
-${ISOPATH}: ${HOME}/ydfs/build-${ARCH}/${INITRAMFS} ${LCMBUILD}/${ARCH}.squashfs ${LCMBUILD}/mate-${ARCH}.squashfs ${LCMBUILD}/kde-${ARCH}.squashfs config.ini #  ${LCMBUILD}
+${ISOPATH}: ${HOME}/ydfs/build-${ARCH}/${INITRAMFS} ${LCMBUILD}/${ARCH}.squashfs ${LCMBUILD}/mate-${ARCH}.squashfs ${LCMBUILD}/kde-${ARCH}.squashfs # config.ini #  ${LCMBUILD}
 	./scripts/make_iso
 
 config.ini:
 	./scripts/make_config_ini
 	ls -l config.ini
+	touch -t 2301011536 config.ini
 live-test:
 	./scripts/make_live_test
 test-arm:
