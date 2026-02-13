@@ -79,12 +79,12 @@ iso-devtools:
 qemu-initramfs:
 	qemu-system-x86_64 -m size=2000 \
 	       	-bios 2.12/boot-efi/bios/qemu-ovmf/bios/bios.bin \
-	       	-kernel /home/yann/2.12/ydfs/build/linux-x86_64-6.18.10/arch/x86_64/boot/bzImage \
-		-initrd /home/yann/2.12/ydfs/build-x86_64/61810 \
+	       	-kernel ${HOME}/2.12/ydfs/build/linux-x86_64-6.18.10/arch/x86_64/boot/bzImage \
+		-initrd ${HOME}/2.12/ydfs/build-x86_64/61810 \
 		-append "rdinit=/init2 nofcc livecd debug1 quiet text"
 
 qemu:
-	qemu-system-x86_64 -m size=2000 -bios 2.12/boot-efi/bios/qemu-ovmf/bios/bios.bin -cdrom /home/yann/iso/linuxconsole.iso
+	qemu-system-x86_64 -m size=2000 -bios 2.12/boot-efi/bios/qemu-ovmf/bios/bios.bin -cdrom ${HOME}/iso/linuxconsole.iso
 
 nodocker:
 	cd 2.12 && make iso
