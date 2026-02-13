@@ -6,31 +6,6 @@ then
 
 	# echo "First Multilib build"
 	bash $HOME_DIBAB/scripts/make_multilib || exit 1
-	# FIXME !
-	# Why references to x86_86/lib instead of multilib/lib for libz.o ??
-	echo "Clean mesa build-32"
-	rm -fR  $HOME/ydfs/src/mesa-*/build-32/
-
-	echo "2nd Multilib build"
-	bash $HOME_DIBAB/scripts/make_multilib 
-
-	echo "Clean libcap-2"
-	rm $HOME/ydfs/src/libcap-2.*/ydfs-multilib-buildt
-	echo "3nd Multilib build"
-	bash $HOME_DIBAB/scripts/make_multilib 
-
-	echo "Clean zst build-32"
-	rm $HOME/ydfs/src/zstd-1.5.5/ydfs-multilib-buildt
-	echo "4nd Multilib build"
-	bash $HOME_DIBAB/scripts/make_multilib 
-
-	echo "Clean gstreamer"
-  	rm -fR $HOME/ydfs/src/gstreamer-1.*/build-32
-	echo "5nd Multilib build"
-	bash $HOME_DIBAB/scripts/make_multilib 
-
-	echo "6nd Multilib build"
-	bash $HOME_DIBAB/scripts/make_multilib || exit 1
 	WINEBUILD=$PWD
 
 	WINEVER=$(basename $PWD)
@@ -43,23 +18,22 @@ then
 	export PKG_CONFIG_PATH=$HOME/multilib/lib/pkgconfig/
 	export LDFLAGS="-L $HOME/multilib/lib -L $HOME/multilib/lib32 -Wl,-rpath,$HOME/multilib/lib32 -Wl,-rpath,$HOME/multilib/lib"
 
-        for INC in odbcinst.h sql.h sqltypes.h sqlucode.h sqlext.h
-        do
-          mv $HOME/multilib/include/$INC $HOME/multilib/include/"$INC"-disabled
-        done
+#        for INC in odbcinst.h sql.h sqltypes.h sqlucode.h sqlext.h
+#        do
+#          mv $HOME/multilib/include/$INC $HOME/multilib/include/"$INC"-disabled
+#        done
 
-	echo "Configure Win32"
-	$HOME/ydfs/src/$WINEVER/configure --prefix=$PREFIX --with-x --with-gstreamer --libdir=$HOME/multilib/lib/ --with-wine64=$WINEBUILD || exit 1
-	echo "Make Win32"
+	echo "Configure Wine"
+
+	$HOME/ydfs/src/$WINEVER/configure --prefix=$PREFIX --disable-tests \
+			    --libdir=$PREFIX/lib32 \
+			    --enable-archs=x86_64,i386 \
+			    --enable-build-id || exit 1
+	echo "Make Wine"
 	make || exit 1
-	echo "Make install Win32"
+	echo "Make install Wine"
 	make prefix="$PREFIX" libdir=$PREFIX/lib32 dlldir=$PREFIX/lib32/wine install || exit 1
     
-	cd $WINEBUILD
-	echo "Make install Win64"
-	make install || exit 1
-	# make prefix="$PREFIX" libdir="$PREFIX/lib" dlldir="$PREFIX/lib/wine" install || exit 1
-	touch buildok-$ARCH
         exit 0
 
 fi

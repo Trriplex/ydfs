@@ -168,7 +168,7 @@ iso: isodep wineprogs ${ISOPATH} # sleep
 metalink:
 	./scripts/iso_to_metalink
 
-${ISOPATH}: ${HOME}/ydfs/build-${ARCH}/${INITRAMFS} ${LCMBUILD}/${ARCH}.squashfs ${LCMBUILD}/mate-${ARCH}.squashfs config.ini #  ${LCMBUILD}
+${ISOPATH}: ${HOME}/ydfs/build-${ARCH}/${INITRAMFS} ${LCMBUILD}/${ARCH}.squashfs ${LCMBUILD}/mate-${ARCH}.squashfs ${LCMBUILD}/kde-${ARCH}.squashfs config.ini #  ${LCMBUILD}
 	./scripts/make_iso
 
 config.ini:
@@ -408,7 +408,7 @@ endif
    
 
 ${DISTRONAME}: ${LCMBUILD}${DISTRONAME}-${ARCH}.squashfs
-${DISTRONAME}: ${LCMBUILD}devtools-${ARCH}.squashfs
+#${DISTRONAME}: ${LCMBUILD}devtools-${ARCH}.squashfs
 ${LCMBUILD}${DISTRONAME}-${ARCH}.squashfs : packages/list-${DISTRONAME}
 	./scripts/make_packages ${DISTRONAME}
 	./scripts/make_module ${DISTRONAME}

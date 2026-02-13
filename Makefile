@@ -101,3 +101,6 @@ linux:
 initramfs:
 	$(CMD) initramfs-docker
 
+touch:
+	$(CMD) touch-docker
+
