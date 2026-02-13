@@ -355,7 +355,7 @@ unset MAKE
 	;;
     soxr )
 	mkdir build32
-	 cd build32
+	cd build32
 	export CC="gcc -m32 -mstackrealign"
   	export CXX="g++ -m32 -mstackrealign"
   	cmake .. \
@@ -363,13 +363,14 @@ unset MAKE
         touch ../ydfs-multilib-buildt
 	;;
     openal-soft )
+	mkdir build32
+	cd build32
 	export CC="gcc -m32 -mstackrealign"
   	export CXX="g++ -m32 -mstackrealign"
-	cmake -DCMAKE_INSTALL_PREFIX=$HOME/multilib -Bbuild \
-    -DCMAKE_BUILD_TYPE=None -DALSOFT_NO_CONFIG_UTIL=ON \
-    -DCMAKE_INSTALL_LIBDIR=lib32
-        cmake --build build
-  	cmake .. \
+	cmake -DCMAKE_INSTALL_PREFIX=$HOME/multilib -Bbuild -DCMAKE_BUILD_TYPE=None -DALSOFT_NO_CONFIG_UTIL=ON -DCMAKE_INSTALL_LIBDIR=lib32  ..
+        touch ../ydfs-multilib-buildt
+        # cmake --build build
+  	# cmake .. \
 	;;
     glib)
 	patch -p1 < $HOME_DIBAB/packages/patches/lib32-glib2.diff

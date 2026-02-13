@@ -136,7 +136,7 @@ ${HOME}/ydfs/x-tools/i386-unknown-linux-uclibc/bin/i386-unknown-linux-uclibc-gcc
 	./scripts/make_busybox_toolchain
 busybox-toolchain: ${HOME}/ydfs/x-tools/i386-unknown-linux-uclibc/bin/i386-unknown-linux-uclibc-gcc
 
-busybox: busybox-toolchain ${HOME}/ydfs/build/busybox-${ARCH}-${BUSYBOX}/_install
+busybox: ${HOME}/ydfs/build/busybox-${ARCH}-${BUSYBOX}/_install
 
 ${HOME}/ydfs/build/busybox-${ARCH}-${BUSYBOX}/_install:
 	./scripts/make_busybox ${BUSYBOX}

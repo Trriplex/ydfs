@@ -103,7 +103,7 @@ install -d $ROOTFS/etc
 
 if [ "$ARCH" = "x86" ] || [ "$ARCH" = "x86_64" ]
 then
-  echo $HOME/ydfs/x-tools/i386-unknown-linux-uclibc/i386-unknown-linux-uclibc/sysroot/lib/
+#  echo $HOME/ydfs/x-tools/i386-unknown-linux-uclibc/i386-unknown-linux-uclibc/sysroot/lib/
   sed -i "s@\$HOME@$HOME@g" $HOME/ydfs/tmp/initramfs-$ARCH/ydfs/detect/media
   sed -i "s@\$HOME@$HOME@g" $HOME/ydfs/tmp/initramfs-$ARCH/etc/profile
   sed -i "s@\$HOME@$HOME@g" $HOME/ydfs/tmp/initramfs-$ARCH/ydfs/detect/modules

@@ -119,7 +119,7 @@ BOOT=NAND
 	      else
                 echo "KERNEL3=6.18.10" >> config.ini
 	      fi
-	      echo "BUSYBOX=1.31.1" >> config.ini
+	      echo "BUSYBOX=1.36.1" >> config.ini
 	    fi
         # autres cas non prévus
         echo "ARCH=$arch" >> config.ini
