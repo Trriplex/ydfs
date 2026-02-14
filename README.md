@@ -1,4 +1,4 @@
-# About YDFS 2026
+# About Your Distro From Scratch 2026
 
 This branch is designed to build LinuxConsole 2026 ISO, modules and packages
 ![logo](/2.12/logos/linuxconsole.png)
