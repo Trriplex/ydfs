@@ -280,7 +280,6 @@ pip::appdirs
 pip::packaging
 #Pyparsing 2 needed
 https://github.com/pyparsing/pyparsing/archive/pyparsing_2.4.7.tar.gz
-#pip::setuptools
 pip::setuptools==80.10.2
 pip::Mako
 pip::scons
@@ -308,6 +307,7 @@ https://cairographics.org/snapshots/cairo-1.17.4.tar.xz
 # Graphviz need cairo for png
 https://gitlab.com/graphviz/graphviz/-/archive/5.0.0/graphviz-5.0.0.tar.gz
 https://github.com/silnrsi/graphite/releases/download/1.3.13/graphite2-1.3.13.tgz
+pip::setuptools==65.0.2
 https://github.com/harfbuzz/harfbuzz/releases/download/7.3.0/harfbuzz-7.3.0.tar.xz
 https://github.com/fribidi/fribidi/releases/download/v1.0.8/fribidi-1.0.8.tar.bz2
 https://download.gnome.org/sources/pango/1.48/pango-1.48.11.tar.xz
@@ -318,6 +318,7 @@ sassc-3.6.1.tar.gz::https://github.com/sass/sassc/archive/3.6.1.tar.gz
 http://ftp.acc.umu.se/pub/gnome/sources/gtk+/3.24/gtk+-3.24.23.tar.xz
 http://bitmath.org/code/mtdev/mtdev-1.1.3.tar.gz
 https://freedesktop.org/software/libevdev/libevdev-1.12.0.tar.xz
+pip::setuptools==80.10.2
 pip::libevdev
 pip::pyudev
 pip::pytest
@@ -669,7 +670,7 @@ http://savannah.nongnu.org/download/icoutils/icoutils-0.31.0.tar.bz2 # playonlin
 https://launchpad.net/python-distutils-extra/trunk/2.39/+download/python-distutils-extra-2.39.tar.gz
 pip::setuptools==65.0.2
 https://gitlab.freedesktop.org/archived-projects/libxklavier.git#tag=libxklavier-5.4
-#pip::setuptools==80.10.2
+pip::setuptools==80.10.2
 http://www.freedesktop.org/software/accountsservice/accountsservice-0.6.39.tar.xz
 https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz
 https://downloads.sourceforge.net/project/giflib/giflib-5.2.1.tar.gz
@@ -749,6 +750,7 @@ https://github.com/SFML/SFML/archive/2.5.1.tar.gz
 http://http.debian.net/debian/pool/main/c/cdrkit/cdrkit_1.1.11.orig.tar.gz
 pip::setuptools==65.0.2
 https://download.gnome.org/sources/brasero/3.12/brasero-3.12.2.tar.xz
+pip::setuptools==80.10.2
 #LibreOffice
 hunspell-1.7.0.tar.gz::https://github.com/hunspell/hunspell/archive/v1.7.0.tar.gz
 https://dev-www.libreoffice.org/src/cppunit-1.14.0.tar.gz
@@ -797,6 +799,7 @@ https://dev-www.libreoffice.org/src/libvisio/libvisio-0.1.6.tar.xz
 https://dev-www.libreoffice.org/src/libqxp/libqxp-0.0.1.tar.xz
 pip::setuptools==65.0.2
 https://github.com/mypaint/libmypaint/releases/download/v1.3.0/libmypaint-1.3.0.tar.xz
+pip::setuptools==80.10.2
 https://sourceforge.net/projects/libepubgen/files/libepubgen-0.1.1/libepubgen-0.1.1.tar.xz
 https://downloads.sourceforge.net/sourceforge/libwpd/libwpd-0.10.2.tar.xz
 https://downloads.sourceforge.net/libwpg/libwpg-0.3.2.tar.xz
@@ -970,7 +973,6 @@ https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-17.0.tar.xz
 git://github.com/falkTX/Carla.git#tag=v2.4.3 #SKIP-x86_64#
 git://github.com/falkTX/Carla.git#tag=v2.5.0 #SKIP-x86#
 #Warning, unset LDFLAGS for building grub
-#pip::setuptools==80.10.2
 ftp://ftp.gnu.org/gnu/grub/grub-2.14.tar.xz
 #END-linuxconsole
 #STOP
