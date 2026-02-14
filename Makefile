@@ -16,20 +16,22 @@ echo:
 	echo $(BUILDING)
 
 prepare:
-	install -d ${HOME}/2.12-modules/multilib
-	install -d ${HOME}/2.12-modules/x86_64
-	install -d ${HOME}/2.12-modules/ydfs
-	install -d ${HOME}/2.12-modules/mate
-	install -d ${HOME}/2.12-modules/kde
-	install -d ${HOME}/2.12-modules/llvm-multilib
+	install -d ${HOME}/2.12/multilib
+	install -d ${HOME}/2.12/x86_64
+	install -d ${HOME}/2.12/ydfs
+	install -d ${HOME}/2.12/mate
+	install -d ${HOME}/2.12/kde
+	install -d ${HOME}/2.12/llvm-multilib
+	install -d ${HOME}/2.12/opkg
 	install -d ${HOME}/iso
 
-	chmod 777 ${HOME}/2.12-modules/multilib
-	chmod 777 ${HOME}/2.12-modules/llvm-multilib
-	chmod 777 ${HOME}/2.12-modules/x86_64
-	chmod 777 ${HOME}/2.12-modules/ydfs
-	chmod 777 ${HOME}/2.12-modules/mate
-	chmod 777 ${HOME}/2.12-modules/kde
+	chmod 777 ${HOME}/2.12/multilib
+	chmod 777 ${HOME}/2.12/x86_64
+	chmod 777 ${HOME}/2.12/ydfs
+	chmod 777 ${HOME}/2.12/mate
+	chmod 777 ${HOME}/2.12/kde
+	chmod 777 ${HOME}/2.12/llvm-multilib
+	chmod 777 ${HOME}/2.12/opkg
 	chmod 777 ${HOME}/iso
 
 	$(CMD) buildenv-docker
