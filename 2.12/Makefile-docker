@@ -73,7 +73,7 @@ openxr-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make openxr'
 
 iso-devtools-docker:
-	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} DISTRONAME=devtools make iso'
+	DISTRONAME=devtools ${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make iso'
 
 touch-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'touch /home/linuxconsole2026/x86_64/buildenv'
@@ -83,4 +83,7 @@ touch-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'touch /home/linuxconsole2026/ydfs/build/modules/linuxconsole-x86_64.squashfs'
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'touch /home/linuxconsole2026/ydfs/build/modules/kde-x86_64.squashfs'
 	${COMPOSE} ${DOCKER_OPTIONS} -c 'touch /home/linuxconsole2026/ydfs/build/modules/mate-x86_64.squashfs'
+
+gamejam-docker:
+	DISTRONAME=gamejam ${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make iso'
 

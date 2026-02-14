@@ -34,7 +34,7 @@ prepare:
 	chmod 777 ${HOME}/2.12/opkg
 	chmod 777 ${HOME}/iso
 
-	$(CMD) buildenv-docker
+#	$(CMD) buildenv-docker
 
 sh:
 	$(CMD) sh-docker
@@ -59,7 +59,7 @@ mate:
 virtualbox:
 	$(CMD) virtualbox-docker
 
-iso:
+iso: prepare
 	$(CMD) iso-docker
 
 updates:
@@ -67,10 +67,6 @@ updates:
 
 live-test:
 	$(CMD) live-test-docker
-
-test-devtools:
-	cd 2.12 && YDFS_ARCH=x86_64 DISTRONAME=devtools make config.ini && scripts/make_test
-	cd 2.12 && rm config.ini
 
 openxr:
 	$(CMD) openxr-docker
@@ -105,4 +101,8 @@ initramfs:
 
 touch:
 	$(CMD) touch-docker
+
+gamejam: prepare
+	$(CMD) gamejam-docker
+
 
