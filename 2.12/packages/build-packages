@@ -296,13 +296,13 @@ fi
         if [ "$TAG" != "" ] && [ ! -e $SOURCE_DIR ] 
         then
 	  echo "Tag is $TAG"
-	  git clone --branch=$TAG --depth=1 -q `echo $ARCHIVE |cut -d'#' -f1` || exit 10
+	  git clone -q --branch=$TAG --depth=1 -q `echo $ARCHIVE |cut -d'#' -f1` || exit 10
 	  # git show
         fi
 
         if [ ! -e $SOURCE_DIR ]
 	then
-	  git clone --depth=1 -q `echo $ARCHIVE |cut -d'#' -f1` || exit 11
+	  git clone -q --depth=1 -q `echo $ARCHIVE |cut -d'#' -f1` || exit 11
         fi
 
 	if [ "$COMMIT" != "" ] 
@@ -311,7 +311,7 @@ fi
 	  echo "At commit $COMMIT" 
 	  echo "Fetch $COMMIT" 
 	  pwd
-	  git fetch --depth=1 origin $COMMIT || exit 12
+	  git fetch -q --depth=1 origin $COMMIT || exit 12
 	  echo "Checkout $COMMIT" 
 	  git checkout $COMMIT || exit 13
 	  echo "Done $COMMIT" 
