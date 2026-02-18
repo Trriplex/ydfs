@@ -93,5 +93,7 @@ clean-docker:
 uninstall-docker:
 	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make uninstall '
 
+buildme-docker:
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} BUILDME=OK make iso'
 
 

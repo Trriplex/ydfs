@@ -293,26 +293,32 @@ fi
         TAG=`echo $ARCHIVE | grep '#tag' | cut -d'=' -f2`
         COMMIT=`echo $ARCHIVE | grep '#commit' | cut -d'=' -f2`
 
-        if [ "$TAG" != "" ]
+        if [ "$TAG" != "" ] && [ ! -e $SOURCE_DIR ] 
         then
 	  echo "Tag is $TAG"
-          [ ! -e $SOURCE_DIR ] 
 	  git clone --branch=$TAG --depth=1 -q `echo $ARCHIVE |cut -d'#' -f1` || exit 10
-          cd $SOURCE_DIR 
+	  # git show
         fi
 
         if [ ! -e $SOURCE_DIR ]
 	then
 	  git clone --depth=1 -q `echo $ARCHIVE |cut -d'#' -f1` || exit 11
-          cd $SOURCE_DIR 
         fi
 
 	if [ "$COMMIT" != "" ] 
 	then
-	  echo "At commit $COMMIT" 
           cd $SOURCE_DIR 
-	  git fetch --depth=1 origin $COMMIT
+	  echo "At commit $COMMIT" 
+	  echo "Fetch $COMMIT" 
+	  pwd
+	  git fetch --depth=1 origin $COMMIT || exit 12
+	  echo "Checkout $COMMIT" 
+	  git checkout $COMMIT || exit 13
+	  echo "Done $COMMIT" 
+	  cd ..
 	fi
+
+        cd $SOURCE_DIR 
 
     fi
     # [ ! -e $SOURCE_DIR ] &&  [ "$NOTEXIT" = "OK" ] && echo "Clone faild with $0, but we continue " && continue

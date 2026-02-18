@@ -113,3 +113,6 @@ clean:
 
 uninstall: 
 	$(CMD) uninstall-docker
+
+buildme: 
+	$(CMD) buildme-docker
