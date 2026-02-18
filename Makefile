@@ -1,6 +1,6 @@
 CMD=cd 2.12 && make -f Makefile-docker
 
-HASDOCKER := $(shell which ddocker)
+HASDOCKER := $(shell which docker)
 
 ifeq ($(HASDOCKER),/usr/bin/docker)
 BUILDING=prepare iso

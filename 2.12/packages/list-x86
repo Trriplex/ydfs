@@ -887,6 +887,7 @@ https://download.gnome.org/sources/libgnomecanvas/2.30/libgnomecanvas-2.30.3.tar
 https://aubio.org/pub/aubio-0.4.9.tar.bz2
 https://pm-utils.freedesktop.org/releases/pm-utils-1.4.1.tar.gz
 https://downloads.sourceforge.net/liboauth/liboauth-1.0.3.tar.gz
+pip::setuptools==65.0.2
 http://tecnocode.co.uk/downloads/uhttpmock/uhttpmock-0.5.1.tar.xz
 https://ftp.gnome.org/pub/gnome/sources/libgdata/0.17/libgdata-0.17.9.tar.xz
 https://www.apache.org/dist/apr/apr-util-1.6.1.tar.bz2
