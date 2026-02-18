@@ -4,6 +4,7 @@ do
   test "$URL" = "" && continue
   printf "\r**  Look for $URL .. "
   echo $URL | grep "git://" >/dev/null && continue
+  echo $URL | grep "gitlab.freedesktop.org/vdpau" >/dev/null && continue
   echo $URL | grep "archlinux:" >/dev/null && continue
   echo $URL | grep "archlinuxpatched:" >/dev/null && continue
   echo $URL | grep "CPAN:/" >/dev/null && continue

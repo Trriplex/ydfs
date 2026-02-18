@@ -289,18 +289,34 @@ fi
     then
 	git clone --recurse-submodules https://github.com/Unvanquished/daemonmap.git
     else
-	    echo "Cloning $ARCHIVE (quiet)"
-        [ ! -e $SOURCE_DIR ] && git clone -q `echo $ARCHIVE |cut -d'#' -f1`
+	echo "Cloning $ARCHIVE (quiet)"
+        TAG=`echo $ARCHIVE | grep '#tag' | cut -d'=' -f2`
+        COMMIT=`echo $ARCHIVE | grep '#commit' | cut -d'=' -f2`
+
+        if [ "$TAG" != "" ]
+        then
+	  echo "Tag is $TAG"
+          [ ! -e $SOURCE_DIR ] 
+	  git clone --branch=$TAG --depth=1 -q `echo $ARCHIVE |cut -d'#' -f1` || exit 10
+          cd $SOURCE_DIR 
+        fi
+
+        if [ ! -e $SOURCE_DIR ]
+	then
+	  git clone --depth=1 -q `echo $ARCHIVE |cut -d'#' -f1` || exit 11
+          cd $SOURCE_DIR 
+        fi
+
+	if [ "$COMMIT" != "" ] 
+	then
+	  echo "At commit $COMMIT" 
+          cd $SOURCE_DIR 
+	  git fetch --depth=1 origin $COMMIT
+	fi
+
     fi
     # [ ! -e $SOURCE_DIR ] &&  [ "$NOTEXIT" = "OK" ] && echo "Clone faild with $0, but we continue " && continue
-    cd $SOURCE_DIR
-    TAG=`echo $ARCHIVE | grep '#tag' | cut -d'=' -f2`
-    COMMIT=`echo $ARCHIVE | grep '#commit' | cut -d'=' -f2`
-    if [ "$TAG" != "" ]
-    then
-	git checkout -q tags/$TAG ||  git checkout -q $TAG # || exit 1
-    fi
-    [ "$COMMIT" != "" ] && echo "At commit $COMMIT" &&  git checkout  $COMMIT && sleep 5
+    # cd $SOURCE_DIR
     # [ ! -n "$REVISION" ] && git reset --hard $REVISION 
     LC_CONFIGURE_OPTS=""
   . $HOME_DIBAB/scripts/includes/build-options
