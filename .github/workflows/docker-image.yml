@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file ./2.12/Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build ./2.12 --file Dockerfile --tag ydfs-2.12:$(date +%s)
