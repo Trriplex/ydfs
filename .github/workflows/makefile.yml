@@ -15,4 +15,4 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Build iso
-      run: cd 2.12 && make iso
+      run:  make iso
