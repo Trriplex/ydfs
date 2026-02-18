@@ -201,6 +201,8 @@ clean-opkg:
 	./scripts/make_clean_opkg
 clean:
 	./scripts/make_clean
+uninstall:
+	./scripts/uninstall-package gobject-introspection-1.71.0
 ifeq ($(ARCH),x86)
 	rm ${ISOPATH}
 	rm ${LCMBUILD}/*

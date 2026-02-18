@@ -10,8 +10,8 @@ DOCKER_OPTIONS=run ydfs2.12 bash
 BUILD_COMMAND=install -d /tmp/ydfs;cp -a 2.12/* /tmp/ydfs;cp /tmp/ydfs/init-x86/etc/profile /home/linuxconsole2026/.bashrc;cd /tmp/ydfs;
 
 OPTION_BUILD=DIBAB_VERBOSE_BUILD=YES BUILDME=OK
-OPTION_BUILD=DIBAB_VERBOSE_BUILD=YES
 OPTION_BUILD=MENUCONFIG=YES
+OPTION_BUILD=DIBAB_VERBOSE_BUILD=YES
 OPTION_BUILD=
 
 initramfs-docker:
@@ -86,4 +86,12 @@ touch-docker:
 
 gamejam-docker:
 	DISTRONAME=gamejam ${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make iso'
+
+clean-docker:
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make clean '
+
+uninstall-docker:
+	${COMPOSE} ${DOCKER_OPTIONS} -c '${BUILD_COMMAND} ${OPTION_BUILD} make uninstall '
+
+
 

@@ -106,3 +106,8 @@ gamejam: prepare
 	$(CMD) gamejam-docker
 
 
+clean: 
+	$(CMD) clean-docker
+
+uninstall: 
+	$(CMD) uninstall-docker
