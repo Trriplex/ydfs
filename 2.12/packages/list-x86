@@ -751,7 +751,6 @@ https://github.com/SFML/SFML/archive/2.5.1.tar.gz
 http://http.debian.net/debian/pool/main/c/cdrkit/cdrkit_1.1.11.orig.tar.gz
 pip::setuptools==65.0.2
 https://download.gnome.org/sources/brasero/3.12/brasero-3.12.2.tar.xz
-pip::setuptools==80.10.2
 #LibreOffice
 hunspell-1.7.0.tar.gz::https://github.com/hunspell/hunspell/archive/v1.7.0.tar.gz
 https://dev-www.libreoffice.org/src/cppunit-1.14.0.tar.gz
