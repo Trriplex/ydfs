@@ -202,7 +202,7 @@ clean-opkg:
 clean:
 	./scripts/make_clean
 uninstall:
-	./scripts/uninstall-package gobject-introspection-1.71.0
+	./scripts/uninstall-package net-tools
 ifeq ($(ARCH),x86)
 	rm ${ISOPATH}
 	rm ${LCMBUILD}/*

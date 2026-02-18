@@ -539,7 +539,7 @@ http://ftp.acc.umu.se/pub/gnome/sources/mobile-broadband-provider-info/20190618/
 https://download.gnome.org/sources/NetworkManager/1.38/NetworkManager-1.38.2.tar.xz
 https://gitlab.gnome.org/GNOME/libnma/-/archive/1.8.34/libnma-1.8.34.tar.bz2
 https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.6.0.tar.xz
-git://git.code.sf.net/p/net-tools/code#commit=0eebece8c9
+git://github.com/ecki/net-tools.git#commit=0eebece8c964e3cfa8a018f42b2e7e751a7009a0
 git://github.com/OpenVPN/openvpn.git#tag=v2.4.8
 https://github.com/blueman-project/blueman/releases/download/2.2.4/blueman-2.2.4.tar.xz
 https://download.gnome.org/sources/network-manager-applet/1.24/network-manager-applet-1.24.0.tar.xz
@@ -949,7 +949,7 @@ https://github.com/zeromq/libzmq/releases/download/v4.3.4/zeromq-4.3.4.tar.gz
 https://github.com/fmtlib/fmt/releases/download/9.0.0/fmt-9.0.0.zip
 # Kodi, etc
 assimp-5.2.5.tar.gz::https://github.com/assimp/assimp/archive/v5.2.5.tar.gz #SKIP-x86#
-git://github.com/vkmark/vkmark.git#commit=cf45f2f  #SKIP-x86#
+git://github.com/vkmark/vkmark.git#commit=cf45f2faee236fd1118be2fcd27e4f2a91fc2e40 #SKIP-x86#
 https://github.com/mypaint/libmypaint/archive/v1.6.1/libmypaint-1.6.1.tar.gz  #SKIP-x86#
 https://github.com/Pulse-Eight/platform/archive/p8-platform-2.1.0.1.tar.gz
 libcec-6.0.2.tar.gz::https://github.com/Pulse-Eight/libcec/archive/libcec-6.0.2.tar.gz

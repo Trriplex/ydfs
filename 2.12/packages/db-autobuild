@@ -292,7 +292,8 @@ Cflags: ' > $PREFIX/lib/pkgconfig/id3tag.pc
   	|| [ -e nm-applet.desktop.in ] \
 	|| [ -e pangomm.doap ] \
 	|| [ -e glibmm.doap ] \
-	|| [ -e mm-common.doap ]
+	|| [ -e mm-common.doap ] \
+        || [ -e src/backend/utils/misc/postgresql.conf.sample ]
   then
 	mkdir build
 	cd build
@@ -304,6 +305,7 @@ Cflags: ' > $PREFIX/lib/pkgconfig/id3tag.pc
     	touch buildok-$ARCH
 	exit 0	
   fi
+
   [ -e libuv.pc.in ] && rm ./autogen.sh
 
   [ -e "json-c.pc.in" ] && echo " json-c.pc.in" && ACLOCAL_FLAGS="-I $HOME/$ARCH/share/aclocal " && ACLOCAL="aclocal $ACLOCAL_FLAGS " NOCONFIGURE=1 ./autogen.sh

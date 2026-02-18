@@ -3,9 +3,6 @@ install -d $PREFIX/bin
 
 [ -e inxi.1 ] && cp inxi $PREFIX/bin # && exit 0
 
-# postgresql
-[ -e src/bin/pg_config/pg_config.c ] && unset MAKELEVEL # && unset MAKEFLAGS && unset MFLAGS &&  echo "cp src/backend/storage/lmgr/lwlocknames.h" && install -d $HOME/$ARCH/include/storage && cp src/backend/storage/lmgr/lwlocknames.h $HOME/$ARCH/include/storage && sleep 5
-
 # odoo
 [ -e odoo/cli/server.py ] && install -d $PREFIX/lib/odoo && cp -fR * $PREFIX/lib/odoo && exit 0
 
